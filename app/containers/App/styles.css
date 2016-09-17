@@ -7,3 +7,9 @@
 .container {
   display: block;
 }
+
+html{
+  font-family: 'Baloo Bhaina', cursive;
+  font-size:24px;
+  color: #4C4C4C;
+}

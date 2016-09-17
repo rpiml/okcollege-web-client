@@ -12,14 +12,28 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import PageHeader from 'components/PageHeader/';
+import PageHero from 'components/PageHero';
+import styles from './styles.css';
 
 export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <div>
+        <PageHeader />
+        <Grid>
+          <Row>
+            <Col xs={1}>
+              {"Yoo1"}
+            </Col>
+            <Col xs={1}>
+              {"Yooo"}
+            </Col>
+          </Row>
+        </Grid>
+      </div>
     );
   }
 }
