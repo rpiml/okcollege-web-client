@@ -67,7 +67,7 @@ class ConnectionAnimation extends React.Component { // eslint-disable-line react
 
   render() {
     return (
-      <div ref="container">
+      <div {...this.props} ref="container">
         <canvas ref="canvas" width={this.state.width} height={this.props.height}>
         </canvas>
       </div>
