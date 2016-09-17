@@ -6,7 +6,6 @@
 
 import React from 'react';
 import Circle from './circle';
-import Measure from 'react-measure';
 
 const STUDENT = 0;
 const COLLEGE = 1;
