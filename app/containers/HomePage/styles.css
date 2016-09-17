@@ -1,0 +1,25 @@
+.topSpacer{
+  height:100px;
+}
+
+.logo{
+  margin-top:20px;
+  display:inline-block;
+  padding:5px;
+  padding-left:14px;
+  padding-right:14px;
+  background-color:#85c7f2;
+  font-size:48px;
+  color:#fff;
+}
+
+.tagLine{
+  margin-top:10px;
+  color:rgba(0,0,0,.5);
+  font-size:32px;
+}
+
+.fgShift{
+  position:relative;
+  top:-200px;
+}
