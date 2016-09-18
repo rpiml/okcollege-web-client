@@ -55,7 +55,7 @@ class ConnectionAnimation extends React.Component { // eslint-disable-line react
     requestAnimationFrame(() => this.tick());
   }
 
-  draw(c){
+  draw(c) {
     c.fillStyle = '#fff';
     c.fillRect(0, 0, this.state.width, this.props.height);
     this.state.circles.filter(circle => circle.state.type === STUDENT)
