@@ -19,6 +19,10 @@
   font-size:32px;
 }
 
+.topSpacer{
+  height:100px;
+}
+
 .fgShift{
   position:relative;
   top:-200px;
@@ -34,4 +38,5 @@
 
 .button{
   border-radius:4px;
+  margin-bottom:10px;
 }
