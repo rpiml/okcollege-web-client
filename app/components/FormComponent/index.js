@@ -9,20 +9,9 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import Slider from 'components/Slider';
+import MultiChoice from 'components/MultiChoice';
+import Choice from 'components/Choice';
 import styles from './styles.css';
-
-// const question = (question, options, onSubmit) => {
-//   return (
-//     <div>
-//       <div className={styles.question}>
-//         {question}
-//       </div>
-//       <div className={styles.submit}>
-//         {question}
-//       </div>
-//     </div>
-//   )
-// };
 
 let survey = {
   firstPage: "start",
@@ -59,14 +48,13 @@ let survey = {
 
 // Choose pageQuestion
 const surveyPageReducer = (pageId = survey.firstPage) => {
-  let page = survey.pages.find(pg => pg.id == pageId);
+  let page ={next:survey.firstPage};
   let pages = [];
   while(page.next != 'done') {
-    pages.push(page.questions.map(question => surveyQuestionReducer(question)));
-    console.log(page.next)
-    page = survey.pages.find(pg => pg.id == page.next)
+    page = survey.pages.find(pg => pg.id == page.next);
+    pages.push(page.questions.map(question => selectQuestionType(question)));
   }
-
+  // console.log(pages);
   return (
     <div>
       {pages.map(page => page)}
@@ -74,7 +62,7 @@ const surveyPageReducer = (pageId = survey.firstPage) => {
   )
 }
 
-const surveyQuestionReducer = (question) => {
+const selectQuestionType = (question) => {
   switch (question.type) {
     case 'slider':
       return <Slider key={question.id} {...question}/>;
@@ -95,9 +83,6 @@ class FormComponent extends React.Component { // eslint-disable-line react/prefe
       <div className={styles.formComponent}>
         <div className={styles.question}>
           {surveyPageReducer()}
-        </div>
-        <div className={styles.submit}>
-          Submit
         </div>
       </div>
     );
