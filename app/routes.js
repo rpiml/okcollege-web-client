@@ -34,6 +34,26 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/survey',
+      name: 'survey',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/Survey/reducer'),
+          System.import('containers/Survey/sagas'),
+          System.import('containers/Survey'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('survey', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

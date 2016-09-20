@@ -17,6 +17,7 @@ import Footer from 'components/Footer';
 import { Container, Row, Col, Button } from 'reactstrap';
 import ConnectionAnimation from 'components/ConnectionAnimation';
 import styles from './styles.css';
+import { Link } from 'react-router'
 
 export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -39,7 +40,9 @@ export default class HomePage extends React.Component { // eslint-disable-line r
                 <FormattedMessage {...messages.leftContent} />
               </Col>
               <Col xs={{ size: 3, offset: 1 }}>
-                <Button color="primary" className={styles.button}>I'm a college student</Button>
+                <Link to={`/survey`}>
+                  <Button color="primary" className={styles.button}>I'm a college student</Button>
+                </Link>
                 <Button color="primary" className={styles.button}>I'm a high school student</Button>
               </Col>
             </Row>
