@@ -13,38 +13,7 @@ import MultiChoice from 'components/MultiChoice';
 import Choice from 'components/Choice';
 import styles from './styles.css';
 
-let survey = {
-  firstPage: "start",
-  pages: [
-    {
-      "id": "start",
-      "questions": [{
-        "id": "years-in-college",
-        "question": "How many years have you been in college?",
-        "type": "slider",
-        "range": [0,5]
-      }],
-      "next": "activities"
-    },
-    {
-      "id": "activities",
-      "questions": [{
-        "id": "sports",
-        "question": "What sports do you play?",
-        "type": "multi-choice",
-        "hasOther": true,
-        "answers": ["Tennis", "Basketball", "Football"]
-      },{
-        "id": "clubs",
-        "question": "What is your favorite club?",
-        "type": "choice",
-        "answers": ["RSA", "FSAE", "IEEE"]
-      }],
-      "next": "done"
-    }
-  ]
-}
-
+import survey from '../../../assets/form.json';
 
 // Choose pageQuestion
 const surveyPageReducer = (pageId = survey.firstPage) => {
