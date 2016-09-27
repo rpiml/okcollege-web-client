@@ -8,9 +8,9 @@ import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import Slider from 'components/Slider';
 import MultiChoice from 'components/MultiChoice';
 import Choice from 'components/Choice';
+import Slider from 'components/Slider';
 import styles from './styles.css';
 
 import survey from '../../../assets/form.json';
@@ -34,7 +34,7 @@ const surveyPageReducer = (pageId = survey.firstPage) => {
 const selectQuestionType = (question) => {
   switch (question.type) {
     case 'slider':
-      return <Slider key={question.id} {...question}/>;
+      return <Slider key={question.id} {...question} />;
     case 'multi-choice':
       return <MultiChoice key={question.id} {...question}/>;
     case 'choice':
