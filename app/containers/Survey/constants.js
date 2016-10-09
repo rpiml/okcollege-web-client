@@ -4,4 +4,4 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/Survey/DEFAULT_ACTION';
+export const ANSWER_QUESTION = 'app/Survey/ANSWER_QUESTION';

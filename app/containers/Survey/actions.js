@@ -5,11 +5,13 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  ANSWER_QUESTION,
 } from './constants';
 
-export function defaultAction() {
+export function answerQuestion(questionId, answer) {
   return {
-    type: DEFAULT_ACTION,
+    type: ANSWER_QUESTION,
+    questionId,
+    answer
   };
 }
