@@ -8,7 +8,7 @@ describe('surveyReducer', () => {
   //   expect(surveyReducer(undefined, {})).toEqual(fromJS({}));
   // });
 
-  const singlePageSurvey = {
+  const singlePageSurvey = fromJS({
     "survey": {
       "firstPage": "start",
       "pages": [{
@@ -23,16 +23,18 @@ describe('surveyReducer', () => {
         }
       ]
     }
-  };
+  });
 
   it('should modify answers to the survey', () => {
-    let modifiedState = surveyReducer(singlePageSurvey, answerQuestion("years-in-college", 3));
+    let action = answerQuestion("years-in-college", 3);
+    let modifiedState = surveyReducer(singlePageSurvey, action).toJS();
     expect(modifiedState).toNotBe(null);
     expect(modifiedState.survey.pages[0].questions[0].answer).toEqual(3);
   });
 
   it('should not modify answers to the survey if the question isn\'t contained', () => {
-    let modifiedState = surveyReducer(singlePageSurvey, answerQuestion("favorite-football-team", "steelers"));
+    let action = answerQuestion("favorite-football-team", "steelers");
+    let modifiedState = surveyReducer(singlePageSurvey, action);
     expect(modifiedState).toEqual(singlePageSurvey);
   });
 

@@ -21,11 +21,15 @@ class Slider extends React.Component { // eslint-disable-line react/prefer-state
         <InputRange
             maxValue={10}
             minValue={0}
-            value={5}
+            value={this.props.answer || 5}
+            onChange={(_,v) => this.props.onChange(v)}
             />
       </div>
     );
   }
 }
+Slider.propTypes = {
+  onChange: React.PropTypes.func.isRequired
+};
 
 export default Slider;

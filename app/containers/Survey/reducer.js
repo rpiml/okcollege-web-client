@@ -12,17 +12,18 @@ import {
 
 import survey from '../../../assets/form.json';
 
-const initialState = fromJS({survey});
+const initialState = fromJS({survey, currentPage: 'start'});
 
 
 function surveyReducer(state = initialState, action) {
+  let oldState = state.toJS();
   switch (action.type) {
     case ANSWER_QUESTION:
-      return {
-        ...state,
+      return fromJS({
+        ...oldState,
         survey: {
-          ...state.survey,
-          pages: state.survey.pages.map(page => {
+          ...oldState.survey,
+          pages: oldState.survey.pages.map(page => {
             return {
               ...page,
               questions: page.questions.map(question => {
@@ -35,27 +36,7 @@ function surveyReducer(state = initialState, action) {
             };
           })
         }
-      };
-      // return Object.assign({}, state, {
-      //   pages: stage.pages.map(page => Object.assign()
-      //   });
-      // });
-      // return Object.assign({}, state, {
-      //     pages: state.pages.map(page => {
-      //       return Object.assign({}, page, {
-      //         questions: page.questions.map(question => {
-      //           return {};
-      //           // if (question.id === action.questionId){
-      //           //   // return {...question, answer: action.answer};
-      //           //   return Object.assign({}, question, { answer: action.answer });
-      //           // }else{
-      //           //   return question;
-      //           // }
-      //
-      //         });
-      //       });
-      //     })
-      //   });
+      });
     default:
       return state;
   }
