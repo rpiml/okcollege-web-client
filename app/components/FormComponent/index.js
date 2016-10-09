@@ -12,6 +12,7 @@ import MultiChoice from 'components/MultiChoice';
 import Choice from 'components/Choice';
 import Slider from 'components/Slider';
 import styles from './styles.css';
+import {Button } from 'reactstrap';
 
 const selectQuestionElement = (question) => {
   switch (question.type) {
@@ -29,6 +30,7 @@ class FormComponent extends React.Component { // eslint-disable-line react/prefe
   render() {
 
     let onQuestionAnswer = this.props.onQuestionAnswer;
+    let onSubmit = this.props.onSubmit;
     let survey = this.props.survey;
 
     let page = survey.pages.find(page => page.id == this.props.currentPage);
@@ -49,13 +51,15 @@ class FormComponent extends React.Component { // eslint-disable-line react/prefe
         <div className={styles.question}>
           {questionElements}
         </div>
+        <Button onClick={() => onSubmit()} className={styles.submitButton} size="lg" color="primary">Submit</Button>
       </div>
     );
   }
 }
 FormComponent.propTypes = {
   survey: React.PropTypes.object.isRequired,
-  onQuestionAnswer: React.PropTypes.func.isRequired
+  onQuestionAnswer: React.PropTypes.func.isRequired,
+  onSubmit: React.PropTypes.func.isRequired
 };
 
 export default FormComponent;

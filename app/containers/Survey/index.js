@@ -13,10 +13,29 @@ import messages from './messages';
 import FormComponent from 'components/FormComponent';
 import { Container, Row, Col, Button } from 'reactstrap';
 import styles from './styles.css';
-import { answerQuestion } from './actions';
+import { answerQuestion, nextPage } from './actions';
 
 export class Survey extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
+    let content;
+
+    if (this.props.currentPage != 'done'){
+      content = (
+        <FormComponent
+          currentPage={this.props.currentPage}
+          survey={this.props.survey}
+          onQuestionAnswer={(questionId, answer) => {
+            this.props.dispatch(answerQuestion(questionId, answer))
+          }}
+          onSubmit={() => this.props.dispatch(nextPage())}
+          />
+      );
+    }else{
+      content = (
+        <div> Thanks for filling out the survey! </div>
+      );
+    }
+
     return (
       <div className={styles.survey}>
       <Helmet
@@ -31,14 +50,7 @@ export class Survey extends React.Component { // eslint-disable-line react/prefe
             <Col xs={{ size: 2}}>
             </Col>
             <Col xs={{ size: 8, offset: 2}}>
-              <FormComponent
-                currentPage={this.props.currentPage}
-                survey={this.props.survey}
-                onQuestionAnswer={(questionId, answer) => {
-                  this.props.dispatch(answerQuestion(questionId, answer))
-                }}
-                />
-              <Button className={styles.submitButton} size="lg" color="primary">Submit</Button>
+              { content }
             </Col>
           </Row>
         </Container>

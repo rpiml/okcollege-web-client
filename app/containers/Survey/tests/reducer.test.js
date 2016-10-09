@@ -1,7 +1,7 @@
 import expect from 'expect';
 import surveyReducer from '../reducer';
 import { fromJS } from 'immutable';
-import { answerQuestion } from '../actions';
+import { answerQuestion, nextPage } from '../actions';
 
 describe('surveyReducer', () => {
   // it('returns the initial state', () => {
@@ -9,6 +9,7 @@ describe('surveyReducer', () => {
   // });
 
   const singlePageSurvey = fromJS({
+    "currentPage": "start",
     "survey": {
       "firstPage": "start",
       "pages": [{
@@ -36,6 +37,11 @@ describe('surveyReducer', () => {
     let action = answerQuestion("favorite-football-team", "steelers");
     let modifiedState = surveyReducer(singlePageSurvey, action);
     expect(modifiedState).toEqual(singlePageSurvey);
+  });
+
+  it('should go to the next page', () => {
+    let modifiedState = surveyReducer(singlePageSurvey, nextPage()).toJS();
+    expect(modifiedState.currentPage).toEqual("done");
   });
 
 });

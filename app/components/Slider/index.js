@@ -17,7 +17,7 @@ class Slider extends React.Component { // eslint-disable-line react/prefer-state
   render() {
     return (
       <div className={styles.slider}>
-        <div>{this.props.question}</div>
+        <div className={styles.questionText}>{this.props.question}</div>
         <InputRange
             maxValue={10}
             minValue={0}
