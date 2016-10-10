@@ -18,7 +18,7 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
 
 // Initial routing state
 const routeInitialState = fromJS({
-  locationBeforeTransitions: null,
+  locationBeforeTransitions: null
 });
 
 /**
@@ -36,11 +36,18 @@ function routeReducer(state = routeInitialState, action) {
   }
 }
 
+
+const randomUserId = btoa(Math.random().toString()) + btoa(new Date());
+function useridReducer(state = randomUserId, action){
+  return state;
+}
+
 /**
  * Creates the main reducer with the asynchronously loaded ones
  */
 export default function createReducer(asyncReducers) {
   return combineReducers({
+    userid: useridReducer,
     route: routeReducer,
     language: languageProviderReducer,
     ...asyncReducers,

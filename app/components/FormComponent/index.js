@@ -8,85 +8,58 @@ import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import Slider from 'components/Slider';
 import MultiChoice from 'components/MultiChoice';
 import Choice from 'components/Choice';
+import Slider from 'components/Slider';
 import styles from './styles.css';
+import {Button } from 'reactstrap';
 
-let survey = {
-  firstPage: "start",
-  pages: [
-    {
-      "id": "start",
-      "questions": [{
-        "id": "years-in-college",
-        "question": "How many years have you been in college?",
-        "type": "slider",
-        "range": [0,5]
-      }],
-      "next": "activities"
-    },
-    {
-      "id": "activities",
-      "questions": [{
-        "id": "sports",
-        "question": "What sports do you play?",
-        "type": "multi-choice",
-        "hasOther": true,
-        "answers": ["Tennis", "Basketball", "Football"]
-      },{
-        "id": "clubs",
-        "question": "What is your favorite club?",
-        "type": "choice",
-        "answers": ["RSA", "FSAE", "IEEE"]
-      }],
-      "next": "done"
-    }
-  ]
-}
-
-
-// Choose pageQuestion
-const surveyPageReducer = (pageId = survey.firstPage) => {
-  let page ={next:survey.firstPage};
-  let pages = [];
-  while(page.next != 'done') {
-    page = survey.pages.find(pg => pg.id == page.next);
-    pages.push(page.questions.map(question => selectQuestionType(question)));
-  }
-  // console.log(pages);
-  return (
-    <div>
-      {pages.map(page => page)}
-    </div>
-  )
-}
-
-const selectQuestionType = (question) => {
+const selectQuestionElement = (question) => {
   switch (question.type) {
     case 'slider':
-      return <Slider key={question.id} {...question}/>;
+      return Slider;
     case 'multi-choice':
-      return <MultiChoice key={question.id} {...question}/>;
+      return MultiChoice;
     case 'choice':
-      return <Choice  key={question.id} {...question}/>;
-    default:
-      console.log('broken');
-      return;
+      return Choice;
   }
 }
 
 
 class FormComponent extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
+
+    let onQuestionAnswer = this.props.onQuestionAnswer;
+    let onSubmit = this.props.onSubmit;
+    let survey = this.props.survey;
+
+    let page = survey.pages.find(page => page.id == this.props.currentPage);
+
+    let questionElements = page.questions.map(question => {
+      let Question = selectQuestionElement(question);
+      return (
+        <Question
+          key={question.id}
+          onChange={answer => onQuestionAnswer(question.id, answer)}
+          {...question}
+          />
+      );
+    });
+
     return (
       <div className={styles.formComponent}>
         <div className={styles.question}>
-          {surveyPageReducer()}
+          {questionElements}
         </div>
+        <Button onClick={() => onSubmit()} className={styles.submitButton} size="lg" color="primary">Submit</Button>
       </div>
     );
   }
 }
+FormComponent.propTypes = {
+  survey: React.PropTypes.object.isRequired,
+  onQuestionAnswer: React.PropTypes.func.isRequired,
+  onSubmit: React.PropTypes.func.isRequired
+};
 
 export default FormComponent;

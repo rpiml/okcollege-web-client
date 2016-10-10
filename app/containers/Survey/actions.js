@@ -5,11 +5,27 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  ANSWER_QUESTION,
+  SUBMIT_PAGE,
+  NEXT_PAGE
 } from './constants';
 
-export function defaultAction() {
+export function answerQuestion(questionId, answer) {
   return {
-    type: DEFAULT_ACTION,
+    type: ANSWER_QUESTION,
+    questionId,
+    answer
+  };
+}
+
+export function submitPage() {
+  return {
+    type: SUBMIT_PAGE
+  };
+}
+
+export function nextPage() {
+  return {
+    type: NEXT_PAGE
   };
 }
