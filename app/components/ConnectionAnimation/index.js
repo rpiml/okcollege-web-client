@@ -22,6 +22,7 @@ class ConnectionAnimation extends React.Component { // eslint-disable-line react
 
   componentDidMount() {
     const context = this.refs.canvas.getContext('2d');
+    this.mounted = true;
     requestAnimationFrame(() => this.tick());
     this.draw(context);
   }
@@ -31,11 +32,16 @@ class ConnectionAnimation extends React.Component { // eslint-disable-line react
     this.draw(context);
   }
 
+  componentWillUnmount(){
+    this.mounted = false;
+  }
+
   populationMax(){
     return this.state.width * this.props.height / 400 * 20;
   }
 
   tick() {
+    if (!this.mounted) return;
     const r = () => Math.random();
     const w = this.state.width;
     const h = this.props.height;
