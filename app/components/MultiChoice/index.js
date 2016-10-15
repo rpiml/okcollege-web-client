@@ -15,7 +15,7 @@ import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 class CheckBox extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div>
+      <div className={styles.checkboxContainer}>
         <Label check className={styles.checkboxText}>
           <Input
             type="checkbox"
