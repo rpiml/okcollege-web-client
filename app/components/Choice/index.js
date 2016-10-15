@@ -15,7 +15,12 @@ class RadioButton extends React.Component { // eslint-disable-line react/prefer-
   render() {
     return (
       <div className={styles.choiceText}>
-        <Input type="radio" name="radio"/> {this.props.answer}
+        <Input
+          type="radio"
+          name={this.props.answer}
+          onChange={() => this.props.onChange()}
+          checked= {this.props.selected}
+        /> {this.props.answer}
       </div>
     )
   }
@@ -29,11 +34,15 @@ class Choice extends React.Component { // eslint-disable-line react/prefer-state
         <FormGroup check>
           <Label check>
             {this.props.answers.map(answer => {
-              return <RadioButton key={answer} answer={answer}/> ;
+              return <RadioButton
+                        key={answer}
+                        answer={answer}
+                        selected={answer == this.props.answer}
+                        onChange={() => this.props.onChange(answer)}
+                      /> ;
             })}
           </Label>
         </FormGroup>
-
       </div>
     );
   }
