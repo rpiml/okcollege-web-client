@@ -22,13 +22,20 @@ class ConnectionAnimation extends React.Component { // eslint-disable-line react
 
   componentDidMount() {
     const context = this.refs.canvas.getContext('2d');
-    requestAnimationFrame(() => this.tick());
+    this.setState(state => {
+      state.tick = requestAnimationFrame(() => this.tick());
+      return state;
+    });
     this.draw(context);
   }
 
   componentDidUpdate() {
     const context = this.refs.canvas.getContext('2d');
     this.draw(context);
+  }
+
+  componentWillUnmount(){
+    cancelAnimationFrame(this.state.tick);
   }
 
   populationMax(){
@@ -50,9 +57,9 @@ class ConnectionAnimation extends React.Component { // eslint-disable-line react
       const width = this.refs.container.offsetWidth;
       this.refs.canvas.width = width;
       state.width = width;
+      state.tick = requestAnimationFrame(() => this.tick());
       return state;
     });
-    requestAnimationFrame(() => this.tick());
   }
 
   draw(c) {
