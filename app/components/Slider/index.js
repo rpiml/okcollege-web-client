@@ -19,9 +19,10 @@ class Slider extends React.Component { // eslint-disable-line react/prefer-state
       <div className={styles.slider}>
         <div className={styles.questionText}>{this.props.question}</div>
         <InputRange
-            maxValue={10}
-            minValue={0}
-            value={this.props.answer || 5}
+            maxValue={this.props.range[1]}
+            minValue={this.props.range[0]}
+            step={this.props.step || 1}
+            value={this.props.answer || (this.props.range[0] + this.props.range[1])/2}
             onChange={(_,v) => this.props.onChange(v)}
             />
       </div>
