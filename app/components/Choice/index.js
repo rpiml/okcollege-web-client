@@ -14,8 +14,15 @@ import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 class RadioButton extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div className={styles.choiceText}>
-        <Input type="radio" name="radio"/> {this.props.answer}
+      <div className={styles.choiceContainer}>
+        <Label check className={styles.choiceText}>
+          <Input
+            type="radio"
+            name={this.props.answer}
+            onChange={() => this.props.onChange()}
+            checked= {this.props.selected}
+          /> {this.props.answer}
+        </Label>
       </div>
     )
   }
@@ -27,13 +34,15 @@ class Choice extends React.Component { // eslint-disable-line react/prefer-state
       <div className={styles.choice}>
         <div>{this.props.question}</div>
         <FormGroup check>
-          <Label check>
             {this.props.answers.map(answer => {
-              return <RadioButton key={answer} answer={answer}/> ;
+              return <RadioButton
+                        key={answer}
+                        answer={answer}
+                        selected={answer == this.props.answer}
+                        onChange={() => this.props.onChange(answer)}
+                      /> ;
             })}
-          </Label>
         </FormGroup>
-
       </div>
     );
   }
