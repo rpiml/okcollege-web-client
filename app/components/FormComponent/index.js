@@ -9,6 +9,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import MultiChoice from 'components/MultiChoice';
+import MultiChoiceDropdown from 'components/MultiChoiceDropdown';
 import Choice from 'components/Choice';
 import Slider from 'components/Slider';
 import styles from './styles.css';
@@ -22,6 +23,8 @@ const selectQuestionElement = (question) => {
       return MultiChoice;
     case 'choice':
       return Choice;
+    case 'multi-choice-dropdown':
+      return MultiChoiceDropdown;
   }
 }
 

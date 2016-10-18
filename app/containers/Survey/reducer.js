@@ -13,7 +13,7 @@ import {
 
 import survey from '../../../assets/form.json';
 
-const initialState = fromJS({survey, currentPage: 'start'});
+const initialState = fromJS({survey, currentPage: survey.firstPage});
 
 
 function surveyReducer(state = initialState, action) {
