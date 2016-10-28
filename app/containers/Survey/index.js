@@ -13,7 +13,7 @@ import messages from './messages';
 import FormComponent from 'components/FormComponent';
 import { Container, Row, Col, Button } from 'reactstrap';
 import styles from './styles.css';
-import { answerQuestion, submitPage } from './actions';
+import { answerQuestion, userClickedSubmit } from './actions';
 
 export class Survey extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -27,7 +27,7 @@ export class Survey extends React.Component { // eslint-disable-line react/prefe
           onQuestionAnswer={(questionId, answer) => {
             this.props.dispatch(answerQuestion(questionId, answer))
           }}
-          onSubmit={() => this.props.dispatch(submitPage())}
+          onSubmit={() => this.props.dispatch(userClickedSubmit())}
           />
       );
     }else{

@@ -18,7 +18,7 @@ export function answerQuestion(questionId, answer) {
   };
 }
 
-export function submitPage() {
+export function userClickedSubmit() {
   return {
     type: SUBMIT_PAGE
   };
