@@ -45,6 +45,12 @@ function surveyReducer(state = initialState, action) {
         return page.id == jsState.currentPage;
       })
 
+      // If currentPage.next is a string, go to that page
+      if(typeof currentPage.next === 'string' || currentPage.next instanceof String){
+        return state.set('currentPage', currentPage.next);
+      }
+
+      // Else, currentPage.next is an array of conditions with pages
       try{
         let nextPage = currentPage.next.find(page => {
           currentPage.questions.forEach(question => {
@@ -52,10 +58,13 @@ function surveyReducer(state = initialState, action) {
           })
           return eval(page.condition);
         });
+        if(nextPage === undefined){
+          throw `ERROR: No conditions satisfied on page: ${currentPage.id}`
+        }
         return state.set('currentPage', nextPage.page);
       }
       catch(err) {
-        // TODO: Log the error
+        console.error(`Error setting next page with conditional on page: ${currentPage.id}`, err);
         return state;
        }
 
