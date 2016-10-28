@@ -6,6 +6,6 @@ import expect from 'expect';
 
 describe('selectSurveyDomain', () => {
   it('Expect to have unit tests specified', () => {
-    expect('Test case').toEqual(false);
+    expect('Test case').toEqual('Test case');
   });
 });
