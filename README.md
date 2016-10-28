@@ -1,4 +1,5 @@
 # OkCollege Web Client
+[![Build Status](https://travis-ci.org/rpiml/okcollege-web-client.svg)](https://travis-ci.org/rpiml/okcollege-web-client)
 
 This repository hosts the microservice for the client web application portion of the OkCollege service.
 
