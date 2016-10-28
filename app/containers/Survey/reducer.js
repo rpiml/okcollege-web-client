@@ -41,9 +41,23 @@ function surveyReducer(state = initialState, action) {
 
     case NEXT_PAGE:
       let jsState = state.toJS();
-      return state.set('currentPage', jsState.survey.pages.find(page => {
+      let currentPage = jsState.survey.pages.find(page => {
         return page.id == jsState.currentPage;
-      }).next);
+      })
+
+      try{
+        let nextPage = currentPage.next.find(page => {
+          currentPage.questions.forEach(question => {
+            page.condition = page.condition.replace(question.id, String(question.answer));
+          })
+          return eval(page.condition);
+        });
+        return state.set('currentPage', nextPage.page);
+      }
+      catch(err) {
+        // TODO: Log the error
+        return state;
+       }
 
     default:
       return state;

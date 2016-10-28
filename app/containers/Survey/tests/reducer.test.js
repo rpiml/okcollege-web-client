@@ -20,7 +20,13 @@ describe('surveyReducer', () => {
             "type": "slider",
             "range": [0,5]
           }],
-          "next": "done"
+          "next": [{
+            "condition": "years-in-college === 4",
+            "page": "scores"
+            }, {
+            "condition": "true",
+            "page": "done"
+            }]
         }
       ]
     }
@@ -39,9 +45,18 @@ describe('surveyReducer', () => {
     expect(modifiedState).toEqual(singlePageSurvey);
   });
 
-  it('should go to the next page', () => {
-    let modifiedState = surveyReducer(singlePageSurvey, nextPage()).toJS();
-    expect(modifiedState.currentPage).toEqual("done");
+  it('should go to the conditional next page', () => {
+    let action = answerQuestion("years-in-college", 4);
+    let modifiedStateAction = surveyReducer(singlePageSurvey, action)
+    let modifiedStatePage = surveyReducer(modifiedStateAction, nextPage()).toJS();
+    expect(modifiedStatePage.currentPage).toEqual("scores");
+  });
+
+  it('should go to the default next page', () => {
+    let action = answerQuestion("years-in-college", 3);
+    let modifiedStateAction = surveyReducer(singlePageSurvey, action);
+    let modifiedStatePage = surveyReducer(modifiedStateAction, nextPage()).toJS();
+    expect(modifiedStatePage.currentPage).toEqual("done");
   });
 
 });
