@@ -20,6 +20,19 @@ describe('surveyReducer', () => {
             "type": "slider",
             "range": [0,5]
           }],
+          "next": [{
+            "condition": "years-in-college === 4",
+            "page": "scores"
+            }
+          ]
+        }, {
+          "id": "scores",
+          "questions": [{
+            "id": "sat-score",
+            "question": "What was your SAT score?",
+            "type": "slider",
+            "range": [0,2400]
+          }],
           "next": "done"
         }
       ]
@@ -39,9 +52,24 @@ describe('surveyReducer', () => {
     expect(modifiedState).toEqual(singlePageSurvey);
   });
 
-  it('should go to the next page', () => {
+  it('should go to the conditional next page', () => {
+    let action = answerQuestion("years-in-college", 4);
+    let modifiedStateAction = surveyReducer(singlePageSurvey, action)
+    let modifiedStatePage = surveyReducer(modifiedStateAction, nextPage()).toJS();
+    expect(modifiedStatePage.currentPage).toEqual("scores");
+  });
+
+  it('should go to the next page when next is a string', () => {
+    let action = answerQuestion("years-in-college", 4);
+    let modifiedStateAction = surveyReducer(singlePageSurvey, action)
+    let modifiedStatePage = surveyReducer(modifiedStateAction, nextPage())
+    let modifiedStateNext = surveyReducer(modifiedStatePage, nextPage()).toJS();
+    expect(modifiedStateNext.currentPage).toEqual("done");
+  });
+
+  it('should stay on the same page if no conditions are met', () => {
     let modifiedState = surveyReducer(singlePageSurvey, nextPage()).toJS();
-    expect(modifiedState.currentPage).toEqual("done");
+    expect(modifiedState.currentPage).toEqual("start");
   });
 
 });
