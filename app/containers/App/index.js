@@ -11,21 +11,47 @@
  * the linting exception.
  */
 
-import React from 'react';
+import React, {PropTypes} from 'react';
+import Measure from 'react-measure';
 
 import styles from './styles.css';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
 
 export default class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    children: React.PropTypes.node,
+    children: PropTypes.node,
+    headerHeight: PropTypes.number,
+    footerHeight: PropTypes.number,
   };
+  constructor(props) {
+    super(props)
+    this.state = {
+      headerHeight: -1,
+      footerHeight: -1
+    }
+  }
 
   render() {
     return (
       <div className={styles.container}>
-        {React.Children.toArray(this.props.children)}
+        <Measure onMeasure={(dimensions) => this.setState({headerHeight: dimensions.height})}>
+          <Header/>
+        </Measure>
+        {React.Children.map(this.props.children,
+          (child) => React.cloneElement(child, {
+            heights: {
+              header: this.state.headerHeight,
+              footer: this.state.footerHeight
+            }
+          })
+        )}
+        <Measure onMeasure={(dimensions) => this.setState({footerHeight: dimensions.height})}>
+          <Footer/>
+        </Measure>
       </div>
     );
   }
 }
+//{React.Children.toArray(this.props.children)}

@@ -6,6 +6,7 @@
 
 .container {
   display: block;
+  box-sizing: border-box;
 }
 
 html, body {
