@@ -6,7 +6,6 @@
 
 import React from 'react';
 import Circle from './circle';
-import headerStyle from 'components/Header/styles.css';
 
 const STUDENT = 0;
 const COLLEGE = 1;
@@ -24,7 +23,6 @@ class ConnectionAnimation extends React.Component { // eslint-disable-line react
   componentDidMount() {
     const context = this.refs.canvas.getContext('2d');
     this.setState(state => {
-      //state.tick = requestAnimationFrame(() => this.tick());
       state.tick =  setTimeout(() => this.tick(), 1000/24);
       return state;
     });
@@ -37,7 +35,6 @@ class ConnectionAnimation extends React.Component { // eslint-disable-line react
   }
 
   componentWillUnmount(){
-    //cancelAnimationFrame(this.state.tick);
     clearTimeout(this.state.tick);
   }
 
@@ -60,7 +57,6 @@ class ConnectionAnimation extends React.Component { // eslint-disable-line react
       const width = this.refs.container.offsetWidth;
       this.refs.canvas.width = width;
       state.width = width;
-      //state.tick = requestAnimationFrame(() => this.tick());
       state.tick =  setTimeout(() => this.tick(), 1000/24);
       return state;
     });

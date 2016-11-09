@@ -11,8 +11,6 @@
 
 import React from 'react';
 // import Button from 'react-button';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
 import { Container, Row, Col, Button } from 'reactstrap';
 import ConnectionAnimation from 'components/ConnectionAnimation';
 import styles from './styles.css';
@@ -21,12 +19,10 @@ import { Link } from 'react-router'
 
 let getAnimationHeight = (props) => {
   return window.innerHeight - props.heights.header - props.heights.footer
-  //return 200 // - Header.getHeight();
 }
 
 export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
-    console.log(this.props.heights)
     return (
       <div id={styles.homepageContainer}>
         <ConnectionAnimation className={styles.headerBg} height={getAnimationHeight(this.props)} />

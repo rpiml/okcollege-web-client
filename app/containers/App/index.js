@@ -54,4 +54,3 @@ export default class App extends React.Component { // eslint-disable-line react/
     );
   }
 }
-//{React.Children.toArray(this.props.children)}
