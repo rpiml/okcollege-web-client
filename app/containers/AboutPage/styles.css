@@ -1,0 +1,13 @@
+.leftContent {
+  background: red;
+}
+.surroundMessage {
+  padding: 0 100px 0 100px;
+  max-width: 1000px;
+  margin-top: 150px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.surroundMessage > span {
+  font-size: 16px;
+}
