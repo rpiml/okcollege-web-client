@@ -8,8 +8,8 @@ export default class Circle{
     this.state.life ++;
     this.state.x += this.state.dx;
     this.state.y += this.state.dy;
-    this.state.dx = (this.state.dx + (Math.random()*2-1) * 0.02) / 1.001;
-    this.state.dy = (this.state.dy + (Math.random()*2-1) * 0.02) / 1.001;
+    this.state.dx = (this.state.dx + (Math.random()*2-1) * 0.09) / 1.001;
+    this.state.dy = (this.state.dy + (Math.random()*2-1) * 0.09) / 1.001;
 
     const nearestCollege = colleges[argmin(colleges.map(college => {
       if (college == this) return Math.Infinity;
@@ -36,8 +36,8 @@ export default class Circle{
   }
   alpha() {
     return this.state.life < 50 ? this.state.life/50
-          :this.state.life > 550? (600 - this.state.life)/50
-          :1;
+      :this.state.life > 550? (600 - this.state.life)/50
+      :1;
   }
   dead() { return this.state.life > 600; };
   draw(con, circles=[]){

@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "libs": [
+      "browser"
+    ],
+    "doc_comment": {
+      "fullDocs": true,
+      "strong": true
+    },
+    "es_modules": {},
+    "lint": {},
+    "modules": {},
+    "node": {},
+    "react": {}
+  }
+}

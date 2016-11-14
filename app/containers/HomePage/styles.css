@@ -1,42 +1,49 @@
-.logo{
-  margin-top:30px;
+#homepageContainer {
+  position: relative;
+  text-align: center;
+}
+.centerOnTop {
   display:inline-block;
-  padding:5px;
-  padding-left:14px;
-  padding-right:14px;
-  background-color:#85c7f2;
-  font-size:48px;
-  color:#fff;
+  position:absolute;
+  top: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  z-index: 101;
+}
+#welcome {
+  display:inline-block;
+  padding: 40px;
+  box-shadow:0px 0px 4px rgba(218,239,255, 1);
+  background-color: rgba(218,239,255, 0.5);
+  color: #aaa;
+}
+#welcome::before {
+  /*not implemented in chrome*/
+  /*would allow see through background to canvas*/
+  /*backdrop-filter: blur(10px);*/
+  /*filter: blur(5px);*/
+}
+.buttonHolder {
+  
+}
+.buttonHolder > .buttonLink {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .headerBg{
   box-shadow:0px 4px 4px rgba(0,0,0,.25);
+  position:relative;
+  z-index: 45;
 }
-
+.blue {
+  color:#85c7f2;
+}
 .tagLine{
   margin-top:10px;
   color:rgba(0,0,0,.5);
+  color: #aaa;
   font-size:32px;
-}
-
-.topSpacer{
-  height:100px;
-}
-
-.fgShift{
-  position:relative;
-  top:-200px;
-}
-
-.content{
-  white-space:pre-wrap;
-  margin-top:100px;
-  font-size:18px;
-  color:#888;
-  text-align:left;
-}
-
-.button{
-  border-radius:4px;
-  margin-bottom:10px;
 }
