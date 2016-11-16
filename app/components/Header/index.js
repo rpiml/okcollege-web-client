@@ -17,6 +17,7 @@ const Header = ({}) => {
     <Link className={titleClasses} to='/'>
       <h2> OkCollege </h2>
     </Link>
+    <Link className={navClasses}to='login'>Login</Link>
     <Link className={navClasses}to='about'>About</Link>
   </header>
 }
