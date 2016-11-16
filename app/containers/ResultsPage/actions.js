@@ -1,3 +1,4 @@
+//@flow
 /*
  *
  * ResultsPage actions
@@ -5,11 +6,12 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  LOADED,
 } from './constants';
 
-export function defaultAction() {
+export function loaded(rankings: Array<{name: string, ranking:number}>) {
   return {
-    type: DEFAULT_ACTION,
+    type: LOADED,
+    rankings
   };
 }

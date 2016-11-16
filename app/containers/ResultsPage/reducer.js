@@ -1,3 +1,4 @@
+//@flow
 /*
  *
  * ResultsPage reducer
@@ -7,30 +8,24 @@
 import { fromJS } from 'immutable';
 import {
   DEFAULT_ACTION,
+  LOADED
 } from './constants';
 
 const initialState = fromJS({
-  hasResults: true,
-  rankings: [
-    {
-      name: "Rensselaer Polytechnic Institute",
-      ranking: 1
-    },
-    {
-      name: "Massachusetts Institute of Technology",
-      ranking: 2
-    },
-    {
-      name: "Stanford University",
-      ranking: 3
-    }
-  ]
+  hasResults: false,
+  rankings: []
 });
 
 function resultsPageReducer(state = initialState, action) {
   switch (action.type) {
     case DEFAULT_ACTION:
       return state;
+    case LOADED:
+      return fromJS({
+        ...state,
+        hasResults: true,
+        rankings: action.rankings
+      });
     default:
       return state;
   }
