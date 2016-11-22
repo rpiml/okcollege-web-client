@@ -25,8 +25,7 @@ export function* handleLoginRequest(){
       		'Content-Type': 'application/json'
       	})
       });
-      console.log('Im here babayt ')
-      console.log(response)
+    console.log('Im here babayt ')
       if(response && response.body.token){
         yield put(setAuthToken(response))
         // put a login request
