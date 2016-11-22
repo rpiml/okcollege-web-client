@@ -22,14 +22,13 @@ function localLogin(payload) {
     headers: new Headers({
       'Content-Type': 'application/json'
     })
-  })
-    .then(response =>
+  }).then(response =>
       response.json().then(json => ({ json, response }))
+      // res.cookie('myBearerToken', token);
     ).then(({ json, response }) => {
       if (!response.ok) {
         return Promise.reject(json)
       }
-
       return json;
     })
     .then(
@@ -48,7 +47,7 @@ export function* handleLoginRequest(){
 
       // Endpoint to login
       let response = yield call(localLogin, payload);
-
+      document.cookie = `myBearerToken=${response.response.token}`;
       yield put(setAuthToken(response))
       yield put(push('/'));
 

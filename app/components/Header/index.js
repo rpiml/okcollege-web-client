@@ -24,6 +24,7 @@ const Header = (props) => {
       Login
     </Link>
     <Link className={navClasses}to='about'>About</Link>
+    <Link className={navClasses}to='results'>Results</Link>
   </header>
 }
 
