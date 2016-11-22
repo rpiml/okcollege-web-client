@@ -7,9 +7,9 @@
 import { fromJS } from 'immutable';
 // import { <insert action> } from './actions';
 import {
-  LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
+  SET_AUTH_TOKEN,
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
   SIGNUP_ERROR,
@@ -17,6 +17,7 @@ import {
 
 } from './constants';
 
+const initialState = fromJS({});
 
 
 function authReducer(state = initialState, action) {
@@ -24,17 +25,17 @@ function authReducer(state = initialState, action) {
 
   let oldState = state.toJS();
   switch (action.type) {
-    case LOGIN_SUCCESS:
-      return action.payload.id;
-    case LOGIN_SUCCESS:
-      return action.payload.id;
-    case LOGIN_SUCCESS:
-      return action.payload.id;
-    case LOGOUT:
-      return fromJS({
-        ...oldState,
-        token: null
-      });
+    case SET_AUTH_TOKEN:
+        return fromJS({
+            token: action.payload.token,
+            profile: action.payload.profile,
+        });
+    //   return action.payload.id;
+    // case LOGIN_SUCCESS:
+    //   return action.payload.id;
+    // case LOGIN_SUCCESS:
+    //   return action.payload.id;
+    // case LOGOUT:
     default:
       return state;
   }

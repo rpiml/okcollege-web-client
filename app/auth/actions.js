@@ -26,8 +26,8 @@ export function loginRequest(data){
 
 export function setAuthToken(response){
     return {
-        type: LOGIN_REQUEST,
-        payload: response
+        type: SET_AUTH_TOKEN,
+        payload: response.response
     };
 }
 
