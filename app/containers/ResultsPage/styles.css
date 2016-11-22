@@ -1,0 +1,30 @@
+.resultsPage { /* stylelint-disable */
+
+}
+
+.rankingElement{
+  border-bottom:1px solid #ccc;
+  margin-top:20px;
+  height:200px;
+}
+
+.collegeRanking{
+  text-align: center;
+  font-size:48px;
+}
+
+.collegeRanking div{
+  border:1px solid #ccc;
+  display:inline-block;
+  padding:10px;
+  padding-bottom:2px;
+  width:80px;
+  height:80px;
+  margin:10px;
+  border-radius:4px;
+}
+
+.collegeName{
+  font-size:32px;
+  padding-top:8px;
+}
