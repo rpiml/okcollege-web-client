@@ -13,12 +13,14 @@
 
 import React, {PropTypes} from 'react';
 import Measure from 'react-measure';
+import { connect } from 'react-redux';
 
 import styles from './styles.css';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import { changeSignupToLogin } from 'containers/LoginPage/actions';
 
-export default class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     children: PropTypes.node,
@@ -37,7 +39,9 @@ export default class App extends React.Component { // eslint-disable-line react/
     return (
       <div className={styles.container}>
         <Measure onMeasure={(dimensions) => this.setState({headerHeight: dimensions.height})}>
-          <Header/>
+          <Header
+            onClickLogin={() => this.props.dispatch(changeSignupToLogin())}
+          />
         </Measure>
         {React.Children.map(this.props.children,
           (child) => React.cloneElement(child, {
@@ -54,3 +58,5 @@ export default class App extends React.Component { // eslint-disable-line react/
     );
   }
 }
+
+export default connect()(App)

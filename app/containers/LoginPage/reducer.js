@@ -9,14 +9,19 @@ import {
   DEFAULT_ACTION,
     CHANGE_EMAIL,
     CHANGE_PASS,
+    CHANGE_FIRSTNAME,
+    CHANGE_LASTNAME,
+    CHANGE_TO_SIGNUP,
+    CHANGE_TO_LOGIN,
   SUBMIT_CREDENTIALS,
 } from './constants';
 
 const initialState = fromJS({
-  isLoggedIn: false,
   email: '',
   password: '',
-  isLoading: false
+  firstName: '',
+  lastName: '',
+  isSigningUp: false
 });
 
 function loginPageReducer(state = initialState, action) {
@@ -32,12 +37,25 @@ function loginPageReducer(state = initialState, action) {
         ...oldState,
         password: action.pass
       })
-    case DEFAULT_ACTION:
-      return state;
-    case SUBMIT_CREDENTIALS:
+    case CHANGE_FIRSTNAME:
       return fromJS({
         ...oldState,
-        isLoading: true
+        firstName: action.name
+      })
+    case CHANGE_LASTNAME:
+      return fromJS({
+        ...oldState,
+        lastName: action.name
+      })
+    case CHANGE_TO_SIGNUP:
+      return fromJS({
+        ...oldState,
+        isSigningUp: true
+      })
+    case CHANGE_TO_LOGIN:
+      return fromJS({
+        ...oldState,
+        isSigningUp: false
       })
     default:
       return state;

@@ -8,17 +8,44 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import selectLoginPage from './selectors';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { userClickedSubmit, changeUserEmail, changeUserPass } from './actions';
-import styles from './styles.css';
+import { Button } from 'reactstrap';
+
 import { loginRequest } from '../../auth/actions'
+import Login from '../../components/Login'
+import Signup from '../../components/Signup'
+import { userClickedSubmit, changeUserEmail, changeUserPass, changeUserFirstName, changeUserLastName, changeLoginToSignup } from './actions';
+import styles from './styles.css';
 
 const LoginPage = (props) => {
 
-  const { isLoggedIn, email, password, isLoading } = props;
-  //console.log('email:',email, 'pass:',password)
+  const { email, password, firstName, lastName } = props;
 
-  const LoadElement =  isLoading? 'ITS LOADING!!!!' : ''
+
+  const loginElement = (
+    <Login
+      email={email}
+      password={password}
+      changeUserEmail={props.changeUserEmail}
+      changeUserPass={props.changeUserPass}
+      sendLoginRequest={props.sendLoginRequest}
+      changeLoginToSignup={props.changeLoginToSignup}
+    />
+  )
+  const signupElement = (
+    <Signup
+      email={email}
+      password={password}
+      firstName={firstName}
+      lastName={lastName}
+      changeUserEmail={props.changeUserEmail}
+      changeUserPass={props.changeUserPass}
+      changeUserFirstName={props.changeUserFirstName}
+      changeUserLastName={props.changeUserLastName}
+      sendSignupRequest={props.sendSignupRequest}
+    />
+  )
+
+  const pageForm = props.isSigningUp ? signupElement : loginElement
 
   return (
     <div className={styles.loginPage}>
@@ -28,37 +55,7 @@ const LoginPage = (props) => {
           { name: 'description', content: 'Description of LoginPage' },
         ]}
       />
-      <div>
-        <Form>
-          <Label htmlFor='username'>email</Label>
-          <Input
-            name='username'
-            type='email'
-            placeholder='person@example.com'
-            onChange={(e) => props.dispatch(changeUserEmail(e.target.value))}
-          />
-          <Label htmlFor="">password</Label>
-          <Input
-            name='password'
-            type='password'
-            placeholder='password'
-            onChange={(e) => props.changeUserPass(e.target.value)}
-          />
-        </Form>
-        <Button
-          onClick={() => {
-            if (email && password) {
-              props.dispatch(loginRequest({
-                email: email,
-                password: password
-              }))
-            }
-          }}
-          className={styles.submitButton}
-          size="lg"
-          color="primary">Login</Button>
-      </div>
-      {LoadElement}
+      {pageForm}
     </div>
   );
 }
@@ -67,8 +64,13 @@ const mapStateToProps = selectLoginPage();
 
 function mapDispatchToProps(dispatch) {
   return {
-    changeUserPass: email => dispatch(changeUserEmail(email)),
+    changeUserEmail: email => dispatch(changeUserEmail(email)),
     changeUserPass: pass => dispatch(changeUserPass(pass)),
+    changeUserFirstName: firstName => dispatch(changeUserFirstName(firstName)),
+    changeUserLastName: lastName => dispatch(changeUserLastName(lastName)),
+    sendLoginRequest: data => dispatch(loginRequest(data)),
+    sendSignupRequest: data => console.log('singup request goes here'),
+    changeLoginToSignup: () => dispatch(changeLoginToSignup()),
     dispatch,
   };
 }
