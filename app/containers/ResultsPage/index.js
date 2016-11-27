@@ -8,10 +8,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import selectResultsPage from './selectors';
+import {loadColleges} from './actions';
 import styles from './styles.css';
 import {Row, Col,Container} from 'reactstrap';
 
 export class ResultsPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  componentWillMount() {
+    this.props.dispatch(loadColleges());
+  }
+
   render() {
 
     const { hasResults, rankings } = this.props;
