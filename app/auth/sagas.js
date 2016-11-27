@@ -1,16 +1,10 @@
 import {take, put, fork, call} from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { push } from 'react-router-redux';
-import { LOGIN_REQUEST, SIGNUP_REQUEST, LOGOUT } from './constants';
-import {loginRequest, loginError, loginSuccess, setAuthToken} from './actions';
+import { LOGIN_REQUEST, LOGOUT } from './constants';
+import { setAuthToken } from './actions';
 import 'isomorphic-fetch';
 
-
-// LOGIN_SUBMIT,
-// LOGIN_REQUEST,
-// LOGIN_SUCCESS,
-// LOGIN_ERROR,
-// LOGOUT,
 
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
@@ -35,7 +29,6 @@ function localLogin(payload) {
       response => ({response}),
       error => ({error: error.message || 'Something bad happened'})
     )
-
 }
 
 
@@ -47,7 +40,7 @@ export function* handleLoginRequest(){
 
       // Endpoint to login
       let response = yield call(localLogin, payload);
-      document.cookie = `myBearerToken=${response.response.token}`;
+      document.cookie = `access_token=${response.response.token}`;
       yield put(setAuthToken(response))
       yield put(push('/'));
 

@@ -9,9 +9,6 @@ import {
   LOGIN_SUCCESS,
   SET_AUTH_TOKEN,
   LOGIN_ERROR,
-  SIGNUP_REQUEST,
-  SIGNUP_SUCCESS,
-  SIGNUP_ERROR,
   LOGOUT,
 } from './constants';
 
@@ -52,30 +49,5 @@ export function loginError(errors){
 export function logout(){
     return {
         type: LOGOUT
-    };
-}
-
-// Triggered whenever a login is submitted
-export function signupRequest(data){
-    return {
-        type: SIGNUP_REQUEST,
-        payload: data
-    };
-}
-
-// triggered when the signup has succeded
-export function signupSuccess(data){
-    return {
-        type: SIGNUP_SUCCESS,
-        payload: data
-    };
-}
-
-// triggered when the signup failed
-export function signupError(errors){
-    return {
-        type: SIGNUP_ERROR,
-        error: true,
-        payload: errors
     };
 }

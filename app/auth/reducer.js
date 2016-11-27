@@ -30,12 +30,6 @@ function authReducer(state = initialState, action) {
           token: action.payload.token,
           profile: action.payload.profile,
       });
-    //   return action.payload.id;
-    // case LOGIN_SUCCESS:
-    //   return action.payload.id;
-    // case LOGIN_SUCCESS:
-    //   return action.payload.id;
-    // case LOGOUT:
     default:
       return state;
   }
