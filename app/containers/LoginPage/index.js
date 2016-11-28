@@ -13,7 +13,7 @@ import { Button } from 'reactstrap';
 import { loginRequest } from '../../auth/actions'
 import Login from '../../components/Login'
 import Signup from '../../components/Signup'
-import { userClickedSubmit, changeUserEmail, changeUserPass, changeUserFirstName, changeUserLastName, changeLoginToSignup } from './actions';
+import { userClickedSubmit, changeUserEmail, changeUserPass, changeUserFirstName, changeUserLastName, changeLoginToSignup, signupRequest } from './actions';
 import styles from './styles.css';
 
 const LoginPage = (props) => {
@@ -69,7 +69,7 @@ function mapDispatchToProps(dispatch) {
     changeUserFirstName: firstName => dispatch(changeUserFirstName(firstName)),
     changeUserLastName: lastName => dispatch(changeUserLastName(lastName)),
     sendLoginRequest: data => dispatch(loginRequest(data)),
-    sendSignupRequest: data => console.log('singup request goes here'),
+    sendSignupRequest: data => dispatch(signupRequest(data)),
     changeLoginToSignup: () => dispatch(changeLoginToSignup()),
     dispatch,
   };

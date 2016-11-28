@@ -11,7 +11,8 @@ import {
     CHANGE_LASTNAME,
     CHANGE_TO_SIGNUP,
     CHANGE_TO_LOGIN,
-    SUBMIT_CREDENTIALS
+    SUBMIT_CREDENTIALS,
+    SIGNUP_REQUEST
 } from './constants';
 
 export function changeUserEmail(email) {
@@ -55,6 +56,13 @@ export function changeLoginToSignup() {
 export function userClickedSubmit() {
   return {
     type: SUBMIT_CREDENTIALS
+  }
+}
+
+export function signupRequest(data) {
+  return {
+    type: SIGNUP_REQUEST,
+    payload: data
   }
 }
 
