@@ -1,6 +1,10 @@
 .multiChoiceDropdown { /* stylelint-disable */
 
 }
+.fullWidth {
+  display: inline-block;
+  width: 100%;
+}
 
 .dropdownContainer {
   border:1px solid black;
