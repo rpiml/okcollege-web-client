@@ -11,6 +11,7 @@ import messages from './messages';
 import MultiChoice from 'components/MultiChoice';
 import MultiChoiceDropdown from 'components/MultiChoiceDropdown';
 import Choice from 'components/Choice';
+import ChoiceDropdown from 'components/ChoiceDropdown'
 import Slider from 'components/Slider';
 import styles from './styles.css';
 import {Button } from 'reactstrap';
@@ -20,9 +21,9 @@ const selectQuestionElement = (question) => {
     case 'slider':
       return Slider;
     case 'multi-choice':
-      return MultiChoice;
+      return MultiChoiceDropdown;
     case 'choice':
-      return Choice;
+      return ChoiceDropdown;
     case 'multi-choice-dropdown':
       return MultiChoiceDropdown;
   }
