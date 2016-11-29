@@ -8,12 +8,17 @@
 import { fromJS } from 'immutable';
 import {
   ANSWER_QUESTION,
-  NEXT_PAGE
+  NEXT_PAGE,
+  SURVEY_RECEIVED
 } from './constants';
 
 import survey from '../../../assets/form.json';
 
-const initialState = fromJS({survey, currentPage: survey.firstPage});
+const initialState = fromJS({
+  survey,
+  currentPage: survey.firstPage,
+  surveyId: undefined
+});
 
 
 function surveyReducer(state = initialState, action) {
@@ -67,6 +72,10 @@ function surveyReducer(state = initialState, action) {
         console.error(`Error setting next page with conditional on page: ${currentPage.id}`, err);
         return state;
        }
+
+    case SURVEY_RECEIVED:
+      state.set("surveyId", action.surveyId);
+      return state;
 
     default:
       return state;
