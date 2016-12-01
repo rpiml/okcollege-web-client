@@ -1,3 +1,7 @@
 .formComponent { /* stylelint-disable */
   margin:auto;
 }
+
+.question {
+  padding-bottom: 30px;
+}

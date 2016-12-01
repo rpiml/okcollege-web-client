@@ -16,13 +16,11 @@ class CheckBox extends React.Component { // eslint-disable-line react/prefer-sta
   render() {
     return (
       <div className={styles.checkboxContainer}>
-        <Label check className={styles.checkboxText}>
           <Input
             type="checkbox"
-            checked={this.props.selected}
+            value={this.props.selected}
             onChange={() => {this.props.onChange()}}
           /> {this.props.answer}
-        </Label>
       </div>
     )
   }
@@ -43,7 +41,9 @@ class MultiChoice extends React.Component { // eslint-disable-line react/prefer-
   render() {
     return (
       <div className={styles.multiChoice}>
-        <div>{this.props.question}</div>
+        <Label check>
+          {this.props.question}
+        </Label>
         <FormGroup check>
             {this.props.answers.map(answer => {
               return <CheckBox

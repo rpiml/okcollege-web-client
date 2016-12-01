@@ -1,5 +1,4 @@
 .survey { /* stylelint-disable */
-
 }
 
 /* */
@@ -13,6 +12,8 @@
 
 .questions {
   margin-top: 50px;
+  font-family: sans-serif;
+  font-size: 18px;
 }
 
 .submitButton {
