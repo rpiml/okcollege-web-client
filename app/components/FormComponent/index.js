@@ -1,8 +1,8 @@
 /**
-*
-* FormComponent
-*
-*/
+ *
+ * FormComponent
+ *
+ */
 
 import React from 'react';
 
@@ -20,11 +20,21 @@ const selectQuestionElement = (question) => {
     case 'slider':
       return Slider;
     case 'multi-choice':
+<<<<<<< Updated upstream
       return MultiChoice;
     case 'choice':
       return Choice;
     case 'multi-choice-dropdown':
       return MultiChoiceDropdown;
+=======
+      return question.answers.length < 10
+        ? MultiChoice
+        : MultiChoiceDropdown
+    case 'choice':
+      return ChoiceDropdown;
+    default:
+      console.error('ERR bad question type, could not create Question')
+>>>>>>> Stashed changes
   }
 }
 
@@ -41,17 +51,19 @@ class FormComponent extends React.Component { // eslint-disable-line react/prefe
     let questionElements = page.questions.map(question => {
       let Question = selectQuestionElement(question);
       return (
-        <Question
-          key={question.id}
-          onChange={answer => onQuestionAnswer(question.id, answer)}
-          {...question}
+        <div className={styles.question}>
+          <Question
+            key={question.id}
+            onChange={answer => onQuestionAnswer(question.id, answer)}
+            {...question}
           />
+        </div>
       );
     });
 
     return (
       <div className={styles.formComponent}>
-        <div className={styles.question}>
+        <div>
           {questionElements}
         </div>
         <Button onClick={() => onSubmit()} className={styles.submitButton} size="lg" color="primary">Submit</Button>
