@@ -12,6 +12,8 @@ import MultiChoice from 'components/MultiChoice';
 import MultiChoiceDropdown from 'components/MultiChoiceDropdown';
 import Choice from 'components/Choice';
 import Slider from 'components/Slider';
+import Dropdown from 'components/Dropdown';
+import Search from 'components/Search';
 import styles from './styles.css';
 import {Button } from 'reactstrap';
 
@@ -20,9 +22,21 @@ const selectQuestionElement = (question) => {
     case 'slider':
       return Slider;
     case 'multi-choice':
-      return MultiChoice;
+      if(question.answers.length > 50){
+        return Search;
+      } else if(question.answers.length > 5){
+        return Dropdown;
+      } else{
+        return MultiChoice;
+      }
     case 'choice':
-      return Choice;
+      if(question.answers.length > 50){
+        return Search;
+      } else if(question.answers.length > 5){
+        return Dropdown;
+      } else{
+        return Choice;
+      }
     case 'multi-choice-dropdown':
       return MultiChoiceDropdown;
   }
