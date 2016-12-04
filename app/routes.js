@@ -72,6 +72,46 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/login',
+      name: 'loginPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/LoginPage/reducer'),
+          System.import('containers/LoginPage/sagas'),
+          System.import('containers/LoginPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('loginPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/results',
+      name: 'resultsPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/ResultsPage/reducer'),
+          System.import('containers/ResultsPage/sagas'),
+          System.import('containers/ResultsPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('resultsPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

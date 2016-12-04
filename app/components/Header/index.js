@@ -12,12 +12,19 @@ import styles from './styles.css';
 const navClasses = `${styles.navLinks} ${styles.nonTitles}`;
 const titleClasses = `${styles.navLinks} ${styles.title}`;
 
-const Header = ({}) => {
+const Header = (props) => {
   return <header className={styles.header}>
     <Link className={titleClasses} to='/'>
       <h2> OkCollege </h2>
     </Link>
+    <Link 
+      className={navClasses} 
+      to='login'
+      onClick={props.onClickLogin}>
+      Login
+    </Link>
     <Link className={navClasses}to='about'>About</Link>
+    <Link className={navClasses}to='results'>Results</Link>
   </header>
 }
 
