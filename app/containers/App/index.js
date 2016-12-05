@@ -43,14 +43,16 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
             onClickLogin={() => this.props.dispatch(changeSignupToLogin())}
           />
         </Measure>
-        {React.Children.map(this.props.children,
-          (child) => React.cloneElement(child, {
-            heights: {
-              header: this.state.headerHeight,
-              footer: this.state.footerHeight
-            }
-          })
-        )}
+        <div className={styles.pageContainer}>
+          {React.Children.map(this.props.children,
+            (child) => React.cloneElement(child, {
+              heights: {
+                header: this.state.headerHeight,
+                footer: this.state.footerHeight
+              }
+            })
+          )}
+        </div>
         <Measure onMeasure={(dimensions) => this.setState({footerHeight: dimensions.height})}>
           <Footer/>
         </Measure>
