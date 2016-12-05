@@ -9,9 +9,12 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
-import InputRange from 'react-input-range';
+// import InputRange from 'react-input-range';
+import { Slider as Slider_antd } from 'antd';
 
-require("!style!css!react-input-range/dist/react-input-range.css");
+// require("!style!css!react-input-range/dist/react-input-range.css");
+require("!style!css!antd/lib/slider/style/index.css");
+require("!style!css!antd/lib/tooltip/style/index.css");
 
 
 class Slider extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -30,22 +33,24 @@ class Slider extends React.Component { // eslint-disable-line react/prefer-state
     }
   }
 
+
   render() {
     return (
       <div className={styles.slider}>
         <div className={styles.questionText}>{this.props.question}</div>
-        <InputRange
-            maxValue={this.props.range[1]}
-            minValue={this.props.range[0]}
+        <Slider_antd
+            dots
+            max={this.props.range[1]}
+            min={this.props.range[0]}
             step={this.props.step || 1}
             formatLabel={this.removeTrailingZeroes}
-            value={this.props.answer}
-            onChange={(_,v) => this.props.onChange(v)}
+            onAfterChange={this.props.onChange}
             />
       </div>
     );
   }
 }
+
 Slider.propTypes = {
   onChange: React.PropTypes.func.isRequired
 };
