@@ -9,43 +9,30 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
-class RadioButton extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  render() {
-    return (
-      <div className={styles.choiceContainer}>
-        <Label check className={styles.choiceText}>
-          <Input
-            type="radio"
-            name={this.props.answer}
-            onChange={() => this.props.onChange()}
-            checked= {this.props.selected}
-          /> {this.props.answer}
-        </Label>
+import { Radio } from 'antd';
+const RadioGroup = Radio.Group;
+
+require("!style!css!antd/lib/radio/style/index.css");
+
+const Choice = (props) => {
+
+  const onChange = (e) => {
+    props.onChange(e.target.value)
+  };
+
+  return (
+    <div className={styles.choice}>
+      <div>{props.question}</div>
+      <RadioGroup onChange={(e) => props.onChange(e.target.value)}
+      value={props.answer} size="large">
+        {props.answers.map(answer => {
+          return <Radio key={answer} value={answer}>{answer}</Radio>;
+        })}
+      </RadioGroup>
       </div>
-    )
-  }
+  );
 }
 
-class Choice extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  render() {
-    return (
-      <div className={styles.choice}>
-        <div>{this.props.question}</div>
-        <FormGroup check>
-            {this.props.answers.map(answer => {
-              return <RadioButton
-                        key={answer}
-                        answer={answer}
-                        selected={answer == this.props.answer}
-                        onChange={() => this.props.onChange(answer)}
-                      /> ;
-            })}
-        </FormGroup>
-      </div>
-    );
-  }
-}
 
 export default Choice;
