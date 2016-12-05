@@ -51,6 +51,7 @@ class FormComponent extends React.Component { // eslint-disable-line react/prefe
     let survey = this.props.survey;
 
     let page = survey.pages.find(page => page.id == this.props.currentPage);
+    let nextButton = page.next == "done" ? "Submit":"Next";
 
     let questionElements = page.questions.map(question => {
       let Question = selectQuestionElement(question);
@@ -68,7 +69,7 @@ class FormComponent extends React.Component { // eslint-disable-line react/prefe
         <div className={styles.question}>
           {questionElements}
         </div>
-        <Button onClick={() => onSubmit()} className={styles.submitButton} size="lg" color="primary">Submit</Button>
+        <Button onClick={() => onSubmit()} className={styles.submitButton} size="lg" color="primary">{nextButton}</Button>
       </div>
     );
   }
