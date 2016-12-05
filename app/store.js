@@ -8,7 +8,7 @@ import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
 import authSaga from './auth/sagas'
-
+import { autoRehydrate } from 'redux-persist-immutable'
 const sagaMiddleware = createSagaMiddleware();
 const devtools = window.devToolsExtension || (() => noop => noop);
 
@@ -22,6 +22,7 @@ export default function configureStore(initialState = {}, history) {
   ];
 
   const enhancers = [
+    autoRehydrate(),
     applyMiddleware(...middlewares),
     devtools(),
   ];
