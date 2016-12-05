@@ -31,7 +31,7 @@ const Signup = (props) => {
           name="password"
           placeholder='password'
           value={password}
-          onChange={(e) => props.changeUserPassword(e.target.value)}></Input>
+          onChange={(e) => props.changeUserPass(e.target.value)}></Input>
       </Form>
       <Button size="lg" color="primary"
         onClick={() => {
