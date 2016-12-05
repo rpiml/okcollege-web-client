@@ -33,13 +33,16 @@ class Slider extends React.Component { // eslint-disable-line react/prefer-state
     }
   }
 
-
   render() {
+    let marks = {};
+    marks[this.props.range[0]] = this.props.range[0].toString();
+    marks[this.props.range[1]] = this.props.range[1].toString();
+
     return (
       <div className={styles.slider}>
         <div className={styles.questionText}>{this.props.question}</div>
         <Slider_antd
-            dots
+            marks={marks}
             max={this.props.range[1]}
             min={this.props.range[0]}
             step={this.props.step || 1}
