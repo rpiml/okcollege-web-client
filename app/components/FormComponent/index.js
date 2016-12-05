@@ -12,6 +12,8 @@ import MultiChoice from 'components/MultiChoice';
 import MultiChoiceDropdown from 'components/MultiChoiceDropdown';
 import Choice from 'components/Choice';
 import Slider from 'components/Slider';
+import Dropdown from 'components/Dropdown';
+import Search from 'components/Search';
 import styles from './styles.css';
 import {Button } from 'reactstrap';
 
@@ -20,9 +22,21 @@ const selectQuestionElement = (question) => {
     case 'slider':
       return Slider;
     case 'multi-choice':
-      return MultiChoice;
+      if(question.answers.length > 50){
+        return Search;
+      } else if(question.answers.length > 5){
+        return Dropdown;
+      } else{
+        return MultiChoice;
+      }
     case 'choice':
-      return Choice;
+      if(question.answers.length > 50){
+        return Search;
+      } else if(question.answers.length > 5){
+        return Dropdown;
+      } else{
+        return Choice;
+      }
     case 'multi-choice-dropdown':
       return MultiChoiceDropdown;
   }
@@ -37,6 +51,7 @@ class FormComponent extends React.Component { // eslint-disable-line react/prefe
     let survey = this.props.survey;
 
     let page = survey.pages.find(page => page.id == this.props.currentPage);
+    let nextButton = page.next == "done" ? "Submit":"Next";
 
     let questionElements = page.questions.map(question => {
       let Question = selectQuestionElement(question);
@@ -54,7 +69,7 @@ class FormComponent extends React.Component { // eslint-disable-line react/prefe
         <div className={styles.question}>
           {questionElements}
         </div>
-        <Button onClick={() => onSubmit()} className={styles.submitButton} size="lg" color="primary">Submit</Button>
+        <Button onClick={() => onSubmit()} className={styles.submitButton} size="lg" color="primary">{nextButton}</Button>
       </div>
     );
   }

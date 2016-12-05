@@ -1,5 +1,5 @@
 {
-  "name": "react-boilerplate",
+  "name": "okcollege",
   "version": "3.1.0",
   "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
   "repository": {
@@ -63,6 +63,15 @@
       ],
       "react",
       "stage-0"
+    ],
+    "plugins": [
+      [
+        "import",
+        {
+          "libraryName": "antd",
+          "style": "css"
+        }
+      ]
     ],
     "env": {
       "production": {
@@ -180,6 +189,8 @@
     ]
   },
   "dependencies": {
+    "antd": "^2.5.0",
+    "babel-plugin-import": "^1.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.16.0",
     "babel-polyfill": "6.13.0",
     "babel-preset-stage-0": "^6.5.0",
@@ -189,6 +200,7 @@
     "compute-argmin": "^1.0.1",
     "express": "4.14.0",
     "fontfaceobserver": "2.0.1",
+    "fuse.js": "^2.5.0",
     "history": "3.0.0",
     "immutable": "3.8.1",
     "intl": "1.2.4",
