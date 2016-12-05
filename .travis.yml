@@ -16,4 +16,4 @@ before_install:
 notifications:
   email:
     on_failure: change
-after_success: 'npm run coveralls'
+after_success: 'npm test'
