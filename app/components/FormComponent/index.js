@@ -1,18 +1,16 @@
 /**
-*
-* FormComponent
-*
-*/
+ *
+ * FormComponent
+ *
+ */
 
 import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import MultiChoice from 'components/MultiChoice';
-import MultiChoiceDropdown from 'components/MultiChoiceDropdown';
 import Choice from 'components/Choice';
 import Slider from 'components/Slider';
-import Dropdown from 'components/Dropdown';
 import Search from 'components/Search';
 import styles from './styles.css';
 import {Button } from 'reactstrap';
@@ -22,23 +20,12 @@ const selectQuestionElement = (question) => {
     case 'slider':
       return Slider;
     case 'multi-choice':
-      if(question.answers.length > 50){
-        return Search;
-      } else if(question.answers.length > 5){
-        return Dropdown;
-      } else{
-        return MultiChoice;
-      }
     case 'choice':
-      if(question.answers.length > 50){
+      if(question.answers.length > 5){
         return Search;
-      } else if(question.answers.length > 5){
-        return Dropdown;
-      } else{
-        return Choice;
+      } else {
+        return question.type == 'choice' ? Choice : MultiChoice;
       }
-    case 'multi-choice-dropdown':
-      return MultiChoiceDropdown;
   }
 }
 
@@ -56,17 +43,20 @@ class FormComponent extends React.Component { // eslint-disable-line react/prefe
     let questionElements = page.questions.map(question => {
       let Question = selectQuestionElement(question);
       return (
-        <Question
-          key={question.id}
-          onChange={answer => onQuestionAnswer(question.id, answer)}
-          {...question}
+        <div className={styles.question}>
+          <Question
+            key={question.id}
+            onChange={answer => onQuestionAnswer(question.id, answer)}
+            answer={this.props.answer}
+            {...question}
           />
+          </div>
       );
     });
 
     return (
       <div className={styles.formComponent}>
-        <div className={styles.question}>
+        <div>
           {questionElements}
         </div>
         <Button onClick={() => onSubmit()} className={styles.submitButton} size="lg" color="primary">{nextButton}</Button>
