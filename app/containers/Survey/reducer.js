@@ -59,7 +59,7 @@ function surveyReducer(state = initialState, action) {
       try{
         let nextPage = currentPage.next.find(page => {
           currentPage.questions.forEach(question => {
-            page.condition = page.condition.replace(question.id, String(question.answer));
+            page.condition = page.condition.replace(question.id, "\"" + String(question.answer) + "\"");
           })
           return eval(page.condition);
         });
