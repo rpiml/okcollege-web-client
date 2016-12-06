@@ -5,7 +5,9 @@
  */
 
 import React from 'react';
+
 import Circle from './circle';
+import styles from './styles.css';
 
 const STUDENT = 0;
 const COLLEGE = 1;
@@ -72,9 +74,19 @@ class ConnectionAnimation extends React.Component { // eslint-disable-line react
   }
 
   render() {
+    const containerStyles = {
+      height: this.props.height
+    }
     return (
-      <div {...this.props} ref="container">
-        <canvas ref="canvas" width={this.state.width} height={this.props.height}>
+      <div
+        {...this.props}
+        style={containerStyles}
+        ref="container">
+        <canvas
+          className={styles.canvas}
+          ref="canvas"
+          width={this.state.width}
+          height={this.props.height}>
         </canvas>
       </div>
     );

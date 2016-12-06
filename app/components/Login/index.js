@@ -29,6 +29,7 @@ const Login = (props) => {
       </Form>
       <div className={styles.buttons}>
         <Button
+          className={styles.buttons}
           onClick={() => {
             if (email && password) {
               props.sendLoginRequest({
@@ -37,12 +38,12 @@ const Login = (props) => {
               })
             }
           }}
-          className={styles.submitButton}
           size="lg"
           color="primary">
           Login
         </Button>
         <Button
+          className={styles.buttons}
           onClick={props.changeLoginToSignup}
           size="lg"
           color="primary">

@@ -20,6 +20,7 @@ const LoginPage = (props) => {
 
   const { email, password, firstName, lastName } = props;
 
+  console.log(props)
 
   const loginElement = (
     <Login
