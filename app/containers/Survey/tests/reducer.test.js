@@ -21,7 +21,7 @@ describe('surveyReducer', () => {
             "range": [0,5]
           }],
           "next": [{
-            "condition": "years-in-college === 4",
+            "condition": "years-in-college == 4",
             "page": "scores"
             }
           ]
@@ -69,6 +69,7 @@ describe('surveyReducer', () => {
 
   it('should stay on the same page if no conditions are met', () => {
     let modifiedState = surveyReducer(singlePageSurvey, nextPage()).toJS();
+    console.log(modifiedState.pages);
     expect(modifiedState.currentPage).toEqual("start");
   });
 
