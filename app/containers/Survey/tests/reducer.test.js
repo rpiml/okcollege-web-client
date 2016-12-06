@@ -21,7 +21,7 @@ describe('surveyReducer', () => {
             "range": [0,5]
           }],
           "next": [{
-            "condition": "years-in-college === 4",
+            "condition": "years-in-college == 4",
             "page": "scores"
             }
           ]
