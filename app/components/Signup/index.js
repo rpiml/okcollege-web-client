@@ -29,7 +29,8 @@ const Signup = (props) => {
         <Label htmlFor="password">Password</Label>
         <Input
           name="password"
-          placeholder='password'
+          type='password'
+          placeholder=''
           value={password}
           onChange={(e) => props.changeUserPass(e.target.value)}></Input>
       </Form>
