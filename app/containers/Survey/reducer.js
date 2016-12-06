@@ -57,9 +57,10 @@ function surveyReducer(state = initialState, action) {
 
       // Else, currentPage.next is an array of conditions with pages
       try{
+        // find first valid page to go to by evaluating each condition
         let nextPage = currentPage.next.find(page => {
           currentPage.questions.forEach(question => {
-            page.condition = page.condition.replace(question.id, String(question.answer));
+            page.condition = page.condition.replace(question.id, "\"" + String(question.answer) + "\"");
           })
           return eval(page.condition);
         });
