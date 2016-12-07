@@ -18,7 +18,6 @@ import styles  from './styles.css'
 
 require("!style!css!antd/dist/antd.min.css");
 
-@replaceMe@
 const LoginPage = (props) => {
 
   const { email, password, firstName, lastName, error, errorMessage } = props;

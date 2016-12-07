@@ -4,15 +4,12 @@
 *
 */
 
-import React from 'react';
+import { Slider as Slider_antd } from 'antd'
+import React  from 'react'
+import { FormattedMessage } from 'react-intl'
+import messages  from './messages'
+import styles  from './styles.css'
 
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
-import styles from './styles.css';
-// import InputRange from 'react-input-range';
-import { Slider as Slider_antd } from 'antd';
-
-// require("!style!css!react-input-range/dist/react-input-range.css");
 require("!style!css!antd/lib/slider/style/index.css");
 require("!style!css!antd/lib/tooltip/style/index.css");
 

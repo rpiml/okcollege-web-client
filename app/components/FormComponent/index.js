@@ -1,19 +1,19 @@
+//@flow
 /**
  *
  * FormComponent
  *
  */
-
-import React from 'react';
-
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
-import MultiChoice from 'components/MultiChoice';
-import Choice from 'components/Choice';
-import Slider from 'components/Slider';
-import Search from 'components/Search';
-import styles from './styles.css';
-import {Button } from 'reactstrap';
+import React  from 'react'
+import Choice  from 'components/Choice'
+import MultiChoice  from 'components/MultiChoice'
+import Search  from 'components/Search'
+import Slider  from 'components/Slider'
+import Text  from 'components/Text'
+import { FormattedMessage } from 'react-intl'
+import { Button } from 'reactstrap'
+import messages  from './messages'
+import styles  from './styles.css'
 
 const selectQuestionElement = (question) => {
   switch (question.type) {
@@ -21,11 +21,13 @@ const selectQuestionElement = (question) => {
       return Slider;
     case 'multi-choice':
     case 'choice':
-      if(question.answers.length > 5){
+      if(question.answers.length > 10){
         return Search;
       } else {
         return question.type == 'choice' ? Choice : MultiChoice;
       }
+    case 'text':
+      return Text;
   }
 }
 
