@@ -32,7 +32,6 @@ const initialState = fromJS({
 
 function loginPageReducer(state = initialState, action) {
   let oldState = state.toJS();
-  console.log(action.type);
   switch (action.type) {
     case CHANGE_EMAIL:
       return fromJS({
