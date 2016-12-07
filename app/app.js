@@ -37,7 +37,7 @@ import 'sanitize.css/sanitize.css';
 const initialState = {};
 const store = configureStore(initialState, browserHistory);
 
-persistStore(store, {storage: localForage})
+persistStore(store, {storage: localForage});
 
 // Sync history and store, as the react-router-redux reducer
 // is under the non-default key ("routing"), selectLocationState

@@ -9,17 +9,20 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import selectLoginPage from './selectors';
 import { Button } from 'reactstrap';
+import { Alert } from 'antd';
+
+require("!style!css!antd/dist/antd.min.css");
 
 import { loginRequest } from '../../auth/actions'
 import Login from '../../components/Login'
 import Signup from '../../components/Signup'
 import { userClickedSubmit, changeUserEmail, changeUserPass, changeUserFirstName, changeUserLastName, changeLoginToSignup, signupRequest } from './actions';
+
 import styles from './styles.css';
 
 const LoginPage = (props) => {
 
-  const { email, password, firstName, lastName } = props;
-
+  const { email, password, firstName, lastName, error, errorMessage } = props;
 
   const loginElement = (
     <Login
@@ -55,6 +58,15 @@ const LoginPage = (props) => {
           { name: 'description', content: 'Description of LoginPage' },
         ]}
       />
+      { error ?
+        <Alert
+          message="Error"
+          description="This is an error"
+          type="error"
+          showIcon
+        />
+        : null
+      }
       {pageForm}
     </div>
   );

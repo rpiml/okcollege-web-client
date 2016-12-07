@@ -11,5 +11,6 @@ export const CHANGE_FIRSTNAME = 'app/LoginPage/CHANGE_FIRSTNAME';
 export const CHANGE_LASTNAME = 'app/LoginPage/CHANGE_LASTNAME';
 export const CHANGE_TO_SIGNUP = 'app/LoginPage/CHANGE_TO_SIGNUP';
 export const CHANGE_TO_LOGIN = 'app/LoginPage/CHANGE_TO_LOGIN';
+export const SIGNUP_ERROR = 'app/LoginPage/SIGNUP_ERROR';
 export const SUBMIT_CREDENTIALS = 'app/Survey/SUBMIT_CREDENTIALS';
 export const SIGNUP_REQUEST = 'app/LoginPage/SIGNUP_REQUEST';

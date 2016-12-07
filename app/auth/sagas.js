@@ -2,7 +2,7 @@ import {take, put, fork, call} from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { push } from 'react-router-redux';
 import { LOGIN_REQUEST, LOGOUT } from './constants';
-import { setAuthToken } from './actions';
+import { setAuthToken, loginError } from './actions';
 import 'isomorphic-fetch';
 
 
@@ -31,8 +31,6 @@ function localLogin(payload) {
     )
 }
 
-
-
 export function* handleLoginRequest(){
   while(true){
       // wait for a login submit
@@ -40,15 +38,15 @@ export function* handleLoginRequest(){
 
       // Endpoint to login
       let response = yield call(localLogin, payload);
-      document.cookie = `access_token=${response.response.token}`;
-      yield put(setAuthToken(response))
-      yield put(push('/'));
-
-      // TODO: Handle Error
+      if (!response.response){
+        yield put(loginError(response.error));
+      }else{
+        document.cookie = `access_token=${response.response.token}`;
+        yield put(setAuthToken(response))
+        yield put(push('/'));
+      }
   }
 }
-
-
 
 export default function* saga(){
   yield [fork(handleLoginRequest)];
