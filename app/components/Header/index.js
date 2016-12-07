@@ -16,15 +16,12 @@ const Header = (props) => {
       <h2> OkCollege </h2>
     </Link>
     <Link className={navClasses}to='about'>About</Link>
-    { props.isLoggedIn ?
-      <Link
-        className={navClasses}
-        to='login'
-        onClick={props.onClickLogin}>
-        Login
-      </Link>
-      : null
-    }
+    <Link
+      className={navClasses}
+      to='login'
+      onClick={props.onClickLogin}>
+      Login
+    </Link>
     { props.isLoggedIn ?
       <Link className={navClasses}to='results'>Results</Link>
       : null
