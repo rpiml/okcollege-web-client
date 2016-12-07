@@ -71,20 +71,17 @@ class Search extends React.Component { // eslint-disable-line react/prefer-state
   }
 
   render() {
-    let changeHandlers = () => {
-      if (this.state.multiple)
-        return {
-          onChange: (e) => {
-            this.setState({answer: e})
-            this.props.onChange(e)
-          }
+    let changeHandlers = (this.state.multiple)
+      ? {
+        onChange: (e) => {
+          this.setState({answer: e})
+          this.props.onChange(e)
         }
-      else
-        return {
-          onChange: (e) => this.setState({answer: e}),
-          onSelect: (e) => this.props.onChange(e)
-        }
-    }
+      }
+      : {
+        onChange: (e) => this.setState({answer: e}),
+        onSelect: (e) => this.props.onChange(e)
+      }
 
     return (
       <div className={styles.search}>
@@ -92,7 +89,7 @@ class Search extends React.Component { // eslint-disable-line react/prefer-state
         <div>{this.props.question}</div>
 
         <Select
-          {...changeHandlers()}
+          {...changeHandlers}
           size={'large'}
           combobox={!this.state.multiple}
           multiple={this.state.multiple}
