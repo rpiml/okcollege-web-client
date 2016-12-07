@@ -30,40 +30,44 @@ const selectQuestionElement = (question) => {
 }
 
 
-class FormComponent extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  render() {
+const FormComponent = (props) => {// eslint-disable-line react/prefer-stateless-function
 
-    let onQuestionAnswer = this.props.onQuestionAnswer;
-    let onSubmit = this.props.onSubmit;
-    let survey = this.props.survey;
+  let { onQuestionAnswer, onSubmit, survey } = props
 
-    let page = survey.pages.find(page => page.id == this.props.currentPage);
-    let nextButton = page.next == "done" ? "Submit":"Next";
+  let page = survey.pages.find(page => page.id == props.currentPage);
+  let nextButton = page.next == "done" ? "Submit":"Next";
 
-    let questionElements = page.questions.map(question => {
-      let Question = selectQuestionElement(question);
-      return (
-        <div className={styles.question}>
-          <Question
-            key={question.id}
-            onChange={answer => onQuestionAnswer(question.id, answer)}
-            answer={this.props.answer}
-            {...question}
-          />
-          </div>
-      );
-    });
+
+  let questionElements = page.questions.map(question => {
+    let Question = selectQuestionElement(question);
+
+
+   let questionContainerClasses = [styles.question]
+    if (question.answer)
+      questionContainerClasses.push(styles.answered)
 
     return (
-      <div className={styles.formComponent}>
-        <div>
-          {questionElements}
-        </div>
-        <Button onClick={() => onSubmit()} className={styles.submitButton} size="lg" color="primary">{nextButton}</Button>
+      <div
+        key={question.id}
+        className={questionContainerClasses.join(' ')}>
+        <Question
+          onChange={answer => onQuestionAnswer(question.id, answer)}
+          {...question}
+        />
       </div>
     );
-  }
+  });
+
+  return (
+    <div className={styles.formComponent}>
+      <div>
+        {questionElements}
+      </div>
+      <Button onClick={() => onSubmit()} className={styles.submitButton} size="lg" color="primary">{nextButton}</Button>
+    </div>
+  );
 }
+
 FormComponent.propTypes = {
   survey: React.PropTypes.object.isRequired,
   onQuestionAnswer: React.PropTypes.func.isRequired,
