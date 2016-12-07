@@ -3,13 +3,13 @@
  * Test  sagas
  */
 
-import { expect } from 'chai';
-import { take, call, put, select } from 'redux-saga/effects';
-import { handleSignupRequest, localSignup } from '../sagas';
-import { SIGNUP_REQUEST } from '../constants';
-import { LOGIN_ERROR } from '../../../auth/constants';
-import { setAuthToken } from '../../../auth/actions';
-import { signupError } from '../actions';
+import { expect } from 'chai'
+import { take, call, put, select } from 'redux-saga/effects'
+import { setAuthToken } from '../../../auth/actions'
+import { LOGIN_ERROR } from '../../../auth/constants'
+import { signupError } from '../actions'
+import { SIGNUP_REQUEST } from '../constants'
+import { handleSignupRequest, localSignup } from '../sagas'
 
 const exPayload = {email: "rick@morty.com", password:"morty"};
 
