@@ -40,6 +40,7 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
       <div className={styles.container}>
         <Measure onMeasure={(dimensions) => this.setState({headerHeight: dimensions.height})}>
           <Header
+            isLoggedIn={true}
             onClickLogin={() => this.props.dispatch(changeSignupToLogin())}
           />
         </Measure>
