@@ -41,7 +41,8 @@ const FormComponent = (props) => {// eslint-disable-line react/prefer-stateless-
   let questionElements = page.questions.map(question => {
     let Question = selectQuestionElement(question);
 
-    let questionContainerClasses = [styles.question]
+
+   let questionContainerClasses = [styles.question]
     if (question.answer)
       questionContainerClasses.push(styles.answered)
 

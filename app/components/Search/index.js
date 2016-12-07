@@ -1,8 +1,8 @@
 /**
-*
-* Search
-*
-*/
+ *
+ * Search
+ *
+ */
 
 import React from 'react';
 import { Select } from 'antd';
@@ -12,6 +12,8 @@ import Fuse from 'fuse.js';
 import styles from './styles.css';
 require("!style!css!antd/lib/select/style/index.css");
 
+const optionLimit = 4
+
 class Search extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   constructor(props) {
@@ -20,12 +22,13 @@ class Search extends React.Component { // eslint-disable-line react/prefer-state
 
     let options = []
     for (var i=0; i<this.props.answers.length; ++i) {
-      if (i > 10)
+      if (i > optionLimit)
         break;
       options.push(<Option key={this.props.answers[i]}>{this.props.answers[i]}</Option>)
     }
 
     this.state = {
+      defaultOptions: options,
       options: options,
       answer: this.props.answer,
       multiple:this.props.type == "multi-choice"
@@ -33,23 +36,30 @@ class Search extends React.Component { // eslint-disable-line react/prefer-state
   }
 
   filter(inputValue) {
-    let settings = {
-      caseSensitive: false,
-      shouldSort: true,
-      tokenize: true,
-      threshold: 0.6,
-      location: 0,
-      distance: 20,
-      maxPatternLength: 32,
-      keys: []
-    };
-    let fuse = new Fuse(this.props.answers, settings);
-    let results = fuse.search(inputValue).map(index => {
+    let results
+    if (!inputValue) {
+      results = this.state.defaultOptions
+    } else {
+
+
+      let settings = {
+        caseSensitive: false,
+        shouldSort: true,
+        tokenize: true,
+        threshold: 0.6,
+        location: 0,
+        distance: 20,
+        maxPatternLength: 32,
+        keys: []
+      };
+      let fuse = new Fuse(this.props.answers, settings);
+      results = fuse.search(inputValue).map(index => {
         return <Option key={this.props.answers[index]}>{this.props.answers[index]}</Option>;
-    })
+      })
 
-    if (results.length > 10) results.length = 10;
+      if (results.length > optionLimit) results.length = optionLimit;
 
+    }
     this.setState({options:results});
   }
 
@@ -61,20 +71,32 @@ class Search extends React.Component { // eslint-disable-line react/prefer-state
   }
 
   render() {
+    let changeHandlers = () => {
+      if (this.state.multiple)
+        return {
+          onChange: (e) => {
+            this.setState({answer: e})
+            this.props.onChange(e)
+          }
+        }
+      else
+        return {
+          onChange: (e) => this.setState({answer: e}),
+          onSelect: (e) => this.props.onChange(e)
+        }
+    }
+
     return (
       <div className={styles.search}>
 
         <div>{this.props.question}</div>
 
         <Select
+          {...changeHandlers()}
           size={'large'}
           combobox={!this.state.multiple}
           multiple={this.state.multiple}
           style={{ width: '100%'}}
-          onChange={(e) => {
-            this.setState({answer: e})
-          }}
-          onSelect={(e) => this.props.onChange(e)}
           value={this.state.answer}
           onSearch={this.filter}
           tokenSeparators={[',']}

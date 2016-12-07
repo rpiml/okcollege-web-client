@@ -4,7 +4,9 @@
 }
 .question {
   padding: 12px 10px;
+  transition: background-color 0.5s ease;
 }
 .answered {
-  background-color: red;
+  background-color: #e7ffec;
+  box-shadow: 0 0 2px 2px #e7ffec;
 }
