@@ -1,11 +1,15 @@
+//@flow
 import {take, put, fork, call} from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { SIGNUP_REQUEST } from './constants';
-import { setAuthToken } from '../../auth/actions';
+import { setAuthToken, loginError } from '../../auth/actions';
+import { signupError } from './actions';
+
+// The login sagas are in /app/auth
 
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
-function localSignup(payload) {
+export function localSignup(payload) {
 
   return fetch("/api/user", {
     method: "POST",
@@ -36,11 +40,13 @@ export function* handleSignupRequest(){
 
       // Endpoint to login
       let response = yield call(localSignup,payload);
-      document.cookie = `access_token=${response.response.token}`;
-      yield put(setAuthToken(response))
-      yield put(push('/'));
-
-      // TODO: Handle Error
+      if (!response.response){
+        yield put(signupError(response.error));
+      }else{
+        document.cookie = `access_token=${response.response.token}`;
+        yield put(setAuthToken(response))
+        yield put(push('/'));
+      }
   }
 }
 

@@ -1,0 +1,9 @@
+.text { /* stylelint-disable */
+  margin: 20px auto;
+}
+
+.textLabel {
+  font-size: 20px;
+  font-weight: 200;
+  margin: auto;
+}

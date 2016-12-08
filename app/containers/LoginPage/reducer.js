@@ -1,3 +1,4 @@
+//@flow
 /*
  *
  * LoginPage reducer
@@ -7,14 +8,19 @@
 import { fromJS } from 'immutable';
 import {
   DEFAULT_ACTION,
-    CHANGE_EMAIL,
-    CHANGE_PASS,
-    CHANGE_FIRSTNAME,
-    CHANGE_LASTNAME,
-    CHANGE_TO_SIGNUP,
-    CHANGE_TO_LOGIN,
+  CHANGE_EMAIL,
+  CHANGE_PASS,
+  CHANGE_FIRSTNAME,
+  CHANGE_LASTNAME,
+  CHANGE_TO_SIGNUP,
+  CHANGE_TO_LOGIN,
+  SIGNUP_ERROR,
   SUBMIT_CREDENTIALS,
 } from './constants';
+
+import {
+  LOGIN_ERROR
+} from '../../auth/constants';
 
 const initialState = fromJS({
   email: '',
@@ -56,6 +62,13 @@ function loginPageReducer(state = initialState, action) {
       return fromJS({
         ...oldState,
         isSigningUp: false
+      })
+    case SIGNUP_ERROR:
+    case LOGIN_ERROR:
+      return fromJS({
+        ...oldState,
+        error: true,
+        errorMessage: action.payload
       })
     default:
       return state;

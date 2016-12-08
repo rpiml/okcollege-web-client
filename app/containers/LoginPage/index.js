@@ -4,22 +4,23 @@
  *
  */
 
-import React from 'react';
-import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
-import selectLoginPage from './selectors';
-import { Button } from 'reactstrap';
-
+import { Alert } from 'antd'
+import React  from 'react'
+import Helmet  from 'react-helmet'
+import { connect } from 'react-redux'
+import { Button } from 'reactstrap'
 import { loginRequest } from '../../auth/actions'
-import Login from '../../components/Login'
-import Signup from '../../components/Signup'
-import { userClickedSubmit, changeUserEmail, changeUserPass, changeUserFirstName, changeUserLastName, changeLoginToSignup, signupRequest } from './actions';
-import styles from './styles.css';
+import Login  from '../../components/Login'
+import Signup  from '../../components/Signup'
+import { userClickedSubmit, changeUserEmail, changeUserPass, changeUserFirstName, changeUserLastName, changeLoginToSignup, signupRequest } from './actions'
+import selectLoginPage  from './selectors'
+import styles  from './styles.css'
+
+require("!style!css!antd/dist/antd.min.css");
 
 const LoginPage = (props) => {
 
-  const { email, password, firstName, lastName } = props;
-
+  const { email, password, firstName, lastName, error, errorMessage } = props;
 
   const loginElement = (
     <Login
@@ -55,6 +56,15 @@ const LoginPage = (props) => {
           { name: 'description', content: 'Description of LoginPage' },
         ]}
       />
+      { error ?
+        <Alert
+          message="Error"
+          description={errorMessage}
+          type="error"
+          showIcon
+        />
+        : null
+      }
       {pageForm}
     </div>
   );
