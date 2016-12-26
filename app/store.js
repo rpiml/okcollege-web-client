@@ -7,8 +7,9 @@ import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
-import authSaga from './auth/sagas'
-import { autoRehydrate } from 'redux-persist-immutable'
+import authSaga from './auth/sagas';
+import { saveState } from './utils/localStorage';
+import throttle from 'lodash/throttle';
 const sagaMiddleware = createSagaMiddleware();
 const devtools = window.devToolsExtension || (() => noop => noop);
 
@@ -22,7 +23,6 @@ export default function configureStore(initialState = {}, history) {
   ];
 
   const enhancers = [
-    autoRehydrate(),
     applyMiddleware(...middlewares),
     devtools(),
   ];
@@ -32,6 +32,16 @@ export default function configureStore(initialState = {}, history) {
     fromJS(initialState),
     compose(...enhancers)
   );
+
+  // store.subscribe(throttle(() => {
+  //   console.log('Here');
+  //   const state = store.getState().toJS();
+  //   if (state.survey && state.route.locationBeforeTransitions.pathname === '/survey') {
+  //     saveState({
+  //       survey: state.survey,
+  //     });
+  //   }
+  // }, 1000));
 
   // Create hook for async sagas
   store.runSaga = sagaMiddleware.run;
