@@ -1,3 +1,4 @@
+//@flow
 /*
  *
  * LoginPage actions
@@ -12,8 +13,16 @@ import {
     CHANGE_TO_SIGNUP,
     CHANGE_TO_LOGIN,
     SUBMIT_CREDENTIALS,
-    SIGNUP_REQUEST
+    SIGNUP_REQUEST,
+    SIGNUP_ERROR
 } from './constants';
+
+declare var $signupRequest: {
+  email: string,
+  password: string,
+  firstname: string,
+  lastName: string
+};
 
 export function changeUserEmail(email) {
   return {
@@ -59,7 +68,15 @@ export function userClickedSubmit() {
   }
 }
 
-export function signupRequest(data) {
+export function signupError(payload){
+  return {
+    type: SIGNUP_ERROR,
+    error: true,
+    payload
+  };
+}
+
+export function signupRequest(data: $signupPayload) {
   return {
     type: SIGNUP_REQUEST,
     payload: data

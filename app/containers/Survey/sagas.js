@@ -1,10 +1,10 @@
 //@flow
-import { take, call, put, select } from 'redux-saga/effects';
-import { delay } from 'redux-saga';
-import {SUBMIT_PAGE} from './constants';
-import { nextPage, predictionReceived } from './actions';
-import { loaded as resultsLoaded } from '../ResultsPage/actions';
-import 'isomorphic-fetch';
+import 'isomorphic-fetch'
+import { delay } from 'redux-saga'
+import { take, call, put, select } from 'redux-saga/effects'
+import { loaded as resultsLoaded } from '../ResultsPage/actions'
+import { nextPage, predictionReceived } from './actions'
+import { SUBMIT_PAGE } from './constants'
 
 // Individual exports for testing
 export function* submitSurvey() {

@@ -33,15 +33,14 @@ export default function configureStore(initialState = {}, history) {
     compose(...enhancers)
   );
 
-  // store.subscribe(throttle(() => {
-  //   console.log('Here');
-  //   const state = store.getState().toJS();
-  //   if (state.survey && state.route.locationBeforeTransitions.pathname === '/survey') {
-  //     saveState({
-  //       survey: state.survey,
-  //     });
-  //   }
-  // }, 1000));
+  store.subscribe(throttle(() => {
+    const state = store.getState().toJS();
+    if (state.survey && state.route.locationBeforeTransitions.pathname === '/survey') {
+      saveState({
+        survey: state.survey,
+      });
+    }
+  }, 1000));
 
   // Create hook for async sagas
   store.runSaga = sagaMiddleware.run;

@@ -9,7 +9,7 @@ import { fromJS } from 'immutable';
 import {
   ANSWER_QUESTION,
   NEXT_PAGE,
-  SURVEY_RECEIVED
+  SURVEY_RECEIVED,
 } from './constants';
 
 import survey from '../../../assets/form.json';
@@ -17,12 +17,12 @@ import survey from '../../../assets/form.json';
 const initialState = fromJS({
   survey,
   currentPage: survey.firstPage,
-  surveyId: undefined
+  surveyId: undefined,
 });
 
 
 function surveyReducer(state = initialState, action) {
-  let oldState = state.toJS();
+  const oldState = state.toJS();
   switch (action.type) {
     case ANSWER_QUESTION:
       return fromJS({
@@ -33,49 +33,53 @@ function surveyReducer(state = initialState, action) {
             return {
               ...page,
               questions: page.questions.map(question => {
-                if (question.id == action.questionId){
-                  return {...question, answer: action.answer};
-                }else{
+                if (question.id == action.questionId) {
+                  return { ...question, answer: action.answer };
+                } else {
                   return question;
                 }
-              })
+              }),
             };
-          })
-        }
+          }),
+        },
       });
 
     case NEXT_PAGE:
-      let jsState = state.toJS();
-      let currentPage = jsState.survey.pages.find(page => {
-        return page.id == jsState.currentPage;
-      })
+      const currentPage = oldState.survey.pages.find(page => {
+        return page.id == oldState.currentPage;
+      });
 
       // If currentPage.next is a string, go to that page
-      if(typeof currentPage.next === 'string' || currentPage.next instanceof String){
+      if (typeof currentPage.next === 'string' || currentPage.next instanceof String) {
         return state.set('currentPage', currentPage.next);
       }
 
       // Else, currentPage.next is an array of conditions with pages
-      try{
-        let nextPage = currentPage.next.find(page => {
+      try {
+        const nextPage = currentPage.next.find(page => {
           currentPage.questions.forEach(question => {
-            page.condition = page.condition.replace(question.id, String(question.answer));
-          })
+            page.condition = page.condition.replace(question.id, '"' + String(question.answer) + '"');
+          });
           return eval(page.condition);
         });
-        if(nextPage === undefined){
-          throw `ERROR: No conditions satisfied on page: ${currentPage.id}`
+        if (nextPage === undefined) {
+          throw `ERROR: No conditions satisfied on page: ${currentPage.id}`;
         }
         return state.set('currentPage', nextPage.page);
       }
-      catch(err) {
+      catch (err) {
         console.error(`Error setting next page with conditional on page: ${currentPage.id}`, err);
         return state;
-       }
+      }
 
     case SURVEY_RECEIVED:
-      state.set("surveyId", action.surveyId);
-      return state;
+      return fromJS({
+        ...oldState,
+        survey: {
+          ...oldState.survey,
+          id: action.surveyId,
+        },
+      });
 
     default:
       return state;
