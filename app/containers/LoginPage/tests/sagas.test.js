@@ -23,6 +23,8 @@ describe('Test Signup', () => {
   it('should fail properly', () => {
     const gen = handleSignupRequest();
     gen.next();
+    gen.next();
+    gen.next();
     gen.next({payload: exPayload});
     let result = gen.next({
       error: "Failure message"
@@ -32,6 +34,8 @@ describe('Test Signup', () => {
 
   it('should get access token', () => {
     const gen = handleSignupRequest();
+    gen.next();
+    gen.next();
     gen.next();
     gen.next({payload: exPayload});
     let response = {
