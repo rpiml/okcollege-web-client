@@ -21,8 +21,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import useScroll from 'react-router-scroll';
 import LanguageProvider from 'containers/LanguageProvider';
 import configureStore from './store';
-import { persistStore } from 'redux-persist-immutable'
-import localForage from 'localforage'
 
 // Import i18n messages
 import { translationMessages } from './i18n';
@@ -36,9 +34,6 @@ import 'sanitize.css/sanitize.css';
 // e.g. `const browserHistory = useRouterHistory(createBrowserHistory)();`
 const initialState = {};
 const store = configureStore(initialState, browserHistory);
-
-
-persistStore(store, {storage: localForage})//.purge() // to clear storage
 
 // Sync history and store, as the react-router-redux reducer
 // is under the non-default key ("routing"), selectLocationState
